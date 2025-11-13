@@ -30,30 +30,34 @@
         .flag-button-icon {
             filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
         }
+        /* Classe especial para o CloudCannon reconhecer áreas editáveis */
+        .editable {
+            outline: 2px solid transparent;
+            transition: outline 0.2s;
+        }
+        .editable:hover {
+            outline: 2px dashed rgba(168, 85, 247, 0.3);
+        }
     </style>
 </head>
 <body class="min-h-screen">
 
-    <!-- 1. SELETOR DE IDIOMA INICIAL -->
     <div id="lang-selector" class="fixed inset-0 bg-[#0d0d1a] z-50 flex flex-col items-center justify-center p-8 transition-opacity duration-500">
         <h1 class="text-4xl md:text-6xl font-extrabold mb-12 text-purple-400 tracking-tight">
             Selecione o Idioma
         </h1>
         <div class="flex space-x-8 md:space-x-16">
             
-            <!-- Bandeira Brasil (PT-BR) -->
             <button class="flag-button flex flex-col items-center group" onclick="selectLanguage('pt-BR')">
                 <span role="img" aria-label="Bandeira do Brasil" class="text-7xl flag-button-icon">🇧🇷</span>
                 <span class="mt-3 text-xl font-medium text-gray-300 group-hover:text-purple-300">Português BR</span>
             </button>
 
-            <!-- Bandeira EUA (EN-US) -->
             <button class="flag-button flex flex-col items-center group" onclick="selectLanguage('en-US')">
                 <span role="img" aria-label="Bandeira dos EUA" class="text-7xl flag-button-icon">🇺🇸</span>
                 <span class="mt-3 text-xl font-medium text-gray-300 group-hover:text-purple-300">English US</span>
             </button>
 
-            <!-- Bandeira Espanha (ES-ES) -->
             <button class="flag-button flex flex-col items-center group" onclick="selectLanguage('es-ES')">
                 <span role="img" aria-label="Bandeira da Espanha" class="text-7xl flag-button-icon">🇪🇸</span>
                 <span class="mt-3 text-xl font-medium text-gray-300 group-hover:text-purple-300">Español ES</span>
@@ -61,7 +65,6 @@
         </div>
     </div>
 
-    <!-- 2. CONTEÚDO PRINCIPAL (Inicialmente Oculto) -->
     <div id="main-content" class="opacity-0 hidden transition-opacity duration-500">
         <header class="sticky top-0 z-40 backdrop-blur-md bg-[#0d0d1a]/80 shadow-lg border-b border-purple-900/50">
             <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
@@ -77,15 +80,14 @@
 
         <main class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-            <!-- HERO SECTION (GENERALIZADO) -->
             <section id="hero" class="pt-24 pb-32 text-center">
                 <p class="text-lg font-mono text-purple-400 mb-4 animate-pulse">
                     &gt; $ Bem-vindo.
                 </p>
-                <h2 class="text-6xl md:text-8xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500" data-i18n="hero_title">
+                <h2 class="text-6xl md:text-8xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 editable" data-i18n="hero_title">
                     Portfólio | Data & Risco
                 </h2>
-                <p class="text-2xl md:text-3xl text-gray-400 max-w-3xl mx-auto" data-i18n="hero_subtitle">
+                <p class="text-2xl md:text-3xl text-gray-400 max-w-3xl mx-auto editable" data-i18n="hero_subtitle">
                     Explore meus projetos de modelagem estatística e análise de dados.
                 </p>
                 <div class="mt-10 flex justify-center space-x-4">
@@ -98,11 +100,10 @@
                 </div>
             </section>
 
-            <!-- ABOUT ME SECTION (MUITO CONCISO) -->
             <section id="about" class="py-20 border-t border-purple-900/50">
                 <h3 class="text-4xl font-bold text-center mb-12 text-purple-300" data-i18n="nav_about">Sobre Mim</h3>
                 <div class="max-w-4xl mx-auto bg-[#1a1a2e] p-8 rounded-2xl data-glow">
-                    <p class="text-lg leading-relaxed text-gray-300" data-i18n="about_content">
+                    <p class="text-lg leading-relaxed text-gray-300 editable" data-i18n="about_content">
                         Sou um profissional focado em Análise de Dados e Risco, com uma forte base em Estatística e Ciências Atuariais. Minhas habilidades se concentram em modelagem, precificação e transformação de dados complexos em valor estratégico.
                     </p>
                     <div class="mt-8 text-center">
@@ -113,11 +114,9 @@
                 </div>
             </section>
 
-            <!-- PROJECTS SECTION (DESTAQUE) -->
             <section id="projects" class="py-20 border-t border-purple-900/50">
                 <h3 class="text-4xl font-bold text-center mb-12 text-purple-300" data-i18n="projects_title">Meus Projetos</h3>
 
-                <!-- Filtros Interativos -->
                 <div class="flex justify-center space-x-2 md:space-x-4 mb-12 flex-wrap">
                     <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-purple-600 hover:bg-purple-700 text-white transition duration-300 active-filter" data-filter="All" data-i18n="filter_all">Todos</button>
                     <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-gray-700 hover:bg-purple-800/50 text-gray-300 transition duration-300" data-filter="ML" data-i18n="filter_ml">Machine Learning</button>
@@ -125,9 +124,8 @@
                     <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-gray-700 hover:bg-purple-800/50 text-gray-300 transition duration-300" data-filter="Risk" data-i18n="filter_risk">Pricing & Risco</button>
                 </div>
 
-                <!-- Container dos Cards de Projeto (Maior volume de conteúdo) -->
                 <div id="project-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Cards serão injetados aqui pelo JavaScript -->
+                    <div class="text-center col-span-3 text-gray-500 animate-pulse">Carregando projetos...</div>
                 </div>
 
                 <div id="no-projects" class="text-center mt-12 text-gray-500 hidden" data-i18n="no_projects">
@@ -142,174 +140,65 @@
     </div>
 
     <script>
-        // --- DADOS DO PORTFÓLIO E TRADUÇÕES (JSON) ---
+        // --- 1. VARIÁVEIS GLOBAIS ---
+        let projectsData = []; 
+        let currentLang = 'pt-BR';
 
-        // 1. DADOS DOS PROJETOS (6 PROJETOS COM FOCO EM ATUARIA/RISCO)
-        const projectsData = [
-            {
-                id: 1,
-                type: 'Risk', 
-                tags: ['R', 'GLM', 'Pricing', 'Atuarial'],
-                link: '#',
-                name: {
-                    'pt-BR': 'Modelagem GLM para Precificação de Seguros',
-                    'en-US': 'GLM Modeling for Insurance Pricing',
-                    'es-ES': 'Modelado GLM para la Fijación de Precios de Seguros'
-                },
-                description: {
-                    'pt-BR': 'Construção e otimização de Modelos Lineares Generalizados (GLMs) para precificação de produtos de seguro, focando na sinistralidade e na rentabilidade. Implementado em R e utilizado na função de Actuarial Analyst.',
-                    'en-US': 'Construction and optimization of Generalized Linear Models (GLMs) for insurance product pricing, focusing on loss ratio and profitability. Implemented in R and used in the Actuarial Analyst role.',
-                    'es-ES': 'Construcción y optimización de Modelos Lineales Generalizados (GLMs) para la fijación de precios de productos de seguros, enfocándose en la siniestralidad y la rentabilidad. Implementado en R y utilizado en el rol de Analista Actuarial.'
-                }
-            },
-            {
-                id: 2,
-                type: 'ML', 
-                tags: ['Python', 'GLM', 'Risco', 'Healthcare'],
-                link: '#',
-                name: {
-                    'pt-BR': 'Consultoria Estatística e Aplicação de GLMs em Saúde',
-                    'en-US': 'Statistical Consulting & GLM Application in Healthcare',
-                    'es-ES': 'Consultoría Estadística y Aplicación de GLMs en Salud'
-                },
-                description: {
-                    'pt-BR': 'Consultoria para ajuste de risco em planos de saúde (Best Doctors Insurance - EUA) utilizando GLMs para precificação e análise de sinistros, demonstrando expertise em modelagem estatística em ambiente remoto.',
-                    'en-US': 'Consulting for risk adjustment in health insurance (Best Doctors Insurance - USA) using GLMs for pricing and claims analysis, demonstrating statistical modeling expertise in a remote environment.',
-                    'es-ES': 'Consultoría para el ajuste de riesgo en planes de salud (Best Doctors Insurance - EE. UU.) utilizando GLMs para la fijación de precios y el análisis de siniestros, demostrando experiencia en modelado estadístico.'
-                }
-            },
-            {
-                id: 3,
-                type: 'Visualization',
-                tags: ['Power BI', 'R', 'Forecasting', 'KPIs'],
-                link: '#',
-                name: {
-                    'pt-BR': 'Dashboard de Forecasting e Análise de Risco (R/Power BI)',
-                    'en-US': 'Forecasting and Risk Analysis Dashboard (R/Power BI)',
-                    'es-ES': 'Panel de Pronóstico y Análisis de Riesgo (R/Power BI)'
-                },
-                description: {
-                    'pt-BR': 'Criação de dashboards em Power BI para monitoramento de KPIs e otimização de processos, aplicando distribuições de probabilidade em R para análises de risco e previsões de mercado.',
-                    'en-US': 'Creation of Power BI dashboards for KPI monitoring and process optimization, applying probability distributions in R for risk analysis and market forecasting.',
-                    'es-ES': 'Creación de paneles en Power BI para monitoreo de KPIs y optimización de procesos, aplicando distribuciones de probabilidad en R para análisis de riesgo y pronósticos de mercado.'
-                }
-            },
-            {
-                id: 4,
-                type: 'Visualization',
-                tags: ['R', 'Sentiment Analysis', 'Looker', 'BI'],
-                link: '#',
-                name: {
-                    'pt-BR': 'Análise de Sentimento e Dashboards Interativos (Looker)',
-                    'en-US': 'Sentiment Analysis and Interactive Dashboards (Looker)',
-                    'es-ES': 'Análisis de Sentimiento y Paneles Interactivos (Looker)'
-                },
-                description: {
-                    'pt-BR': 'Pesquisa em Business Intelligence focada em processamento e limpeza de dados (R) e análise de sentimento. Construção de dashboards interativos em Google Looker e Power BI para visualização pública de insights.',
-                    'en-US': 'Business Intelligence research focused on data processing and cleaning (R) and sentiment analysis. Construction of interactive dashboards in Google Looker and Power BI for public insight visualization.',
-                    'es-ES': 'Investigación en Business Intelligence enfocada en el procesamiento y limpieza de datos (R) y análisis de sentimiento. Construcción de paneles interactivos en Google Looker y Power BI para la visualización pública de insights.'
-                }
-            },
-            {
-                id: 5,
-                type: 'ML', 
-                tags: ['Python', 'Scikit-learn', 'Risco de Crédito'],
-                link: '#',
-                name: {
-                    'pt-BR': 'Modelo de Credit Scoring (Risco de Inadimplência)',
-                    'en-US': 'Credit Scoring Model (Default Risk)',
-                    'es-ES': 'Modelo de Puntuación de Crédito (Riesgo de Impago)'
-                },
-                description: {
-                    'pt-BR': 'Desenvolvimento de um modelo de classificação (Logistic Regression/Random Forest) para avaliar a probabilidade de inadimplência de clientes, auxiliando na decisão de concessão de crédito e mitigação de risco.',
-                    'en-US': 'Developed a classification model (Logistic Regression/Random Forest) to assess the probability of customer default, assisting in credit granting decisions and risk mitigation.',
-                    'es-ES': 'Desarrollo de un modelo de clasificación (Regresión Logística/Random Forest) para evaluar la probabilidad de impago de clientes, ayudando en la decisión de concesión de crédito y mitigación de riesgos.'
-                }
-            },
-            {
-                id: 6,
-                type: 'Visualization', 
-                tags: ['Power BI', 'Data Governance', 'UFRGS', 'SQL'],
-                link: '#',
-                name: {
-                    'pt-BR': 'Dashboards de Governança de Dados para Relatórios Públicos',
-                    'en-US': 'Data Governance Dashboards for Public Reporting',
-                    'es-ES': 'Paneles de Gobernanza de Datos para Informes Públicos'
-                },
-                description: {
-                    'pt-BR': 'Criação de dashboards internos e públicos em Power BI (FAURGS) para monitoramento de metadados e garantia da qualidade dos dados utilizados em relatórios institucionais e científicos.',
-                    'en-US': 'Creation of internal and public Power BI dashboards (FAURGS) for metadata monitoring and ensuring the data quality used in institutional and scientific reports.',
-                    'es-ES': 'Creación de paneles internos y públicos en Power BI (FAURGS) para la monitorización de metadatos y la garantía de la calidad de los datos utilizados en informes institucionales y científicos.'
-                }
-            }
-        ];
-
-        // 2. TRADUÇÕES GLOBAIS
+        // --- 2. TRADUÇÕES ---
         const translations = {
             'pt-BR': {
-                title: 'Portfólio de Dados',
-                nav_about: 'Sobre Mim',
-                nav_projects: 'Projetos',
-                hero_title: 'Portfólio | Data & Risco', 
-                hero_subtitle: 'Explore meus projetos de modelagem estatística e análise de dados.', 
+                title: 'Portfólio de Dados', nav_about: 'Sobre Mim', nav_projects: 'Projetos',
+                hero_title: 'Portfólio | Data & Risco', hero_subtitle: 'Explore meus projetos de modelagem estatística e análise de dados.',
                 about_content: 'Sou um profissional focado em Análise de Dados e Risco, com uma forte base em Estatística e Ciências Atuariais. Minhas habilidades se concentram em modelagem, precificação e transformação de dados complexos em valor estratégico.',
-                projects_title: 'Meus Projetos',
-                filter_all: 'Todos',
-                filter_ml: 'Machine Learning',
-                filter_viz: 'Visualização',
-                filter_risk: 'Pricing & Risco', 
-                no_projects: 'Nenhum projeto encontrado para este filtro.',
-                link_repo: 'Ver Repositório',
-                link_demo: 'Ver Demo',
-                btn_projects: 'Ver Projetos',
-                btn_contact: 'Contato',
+                projects_title: 'Meus Projetos', filter_all: 'Todos', filter_ml: 'Machine Learning',
+                filter_viz: 'Visualização', filter_risk: 'Pricing & Risco', no_projects: 'Nenhum projeto encontrado para este filtro.',
+                link_repo: 'Ver Repositório', link_demo: 'Ver Demo', btn_projects: 'Ver Projetos', btn_contact: 'Contato'
             },
             'en-US': {
-                title: 'Data Portfolio',
-                nav_about: 'About Me',
-                nav_projects: 'Projects',
-                hero_title: 'Portfolio | Data & Risk', 
-                hero_subtitle: 'Explore my statistical modeling and data analysis projects.', 
+                title: 'Data Portfolio', nav_about: 'About Me', nav_projects: 'Projects',
+                hero_title: 'Portfolio | Data & Risk', hero_subtitle: 'Explore my statistical modeling and data analysis projects.',
                 about_content: 'I am a professional focused on Data and Risk Analysis, with a strong foundation in Statistics and Actuarial Science. My skills concentrate on modeling, pricing, and transforming complex data into strategic value.',
-                projects_title: 'My Projects',
-                filter_all: 'All',
-                filter_ml: 'Machine Learning',
-                filter_viz: 'Visualization',
-                filter_risk: 'Pricing & Risk', 
-                no_projects: 'No projects found for this filter.',
-                link_repo: 'View Repository',
-                link_demo: 'View Demo',
-                btn_projects: 'View Projects',
-                btn_contact: 'Contact',
+                projects_title: 'My Projects', filter_all: 'All', filter_ml: 'Machine Learning',
+                filter_viz: 'Visualization', filter_risk: 'Pricing & Risk', no_projects: 'No projects found for this filter.',
+                link_repo: 'View Repository', link_demo: 'View Demo', btn_projects: 'View Projects', btn_contact: 'Contact'
             },
             'es-ES': {
-                title: 'Portafolio de Datos',
-                nav_about: 'Sobre Mí',
-                nav_projects: 'Proyectos',
-                hero_title: 'Portafolio | Datos y Riesgo', 
-                hero_subtitle: 'Explore mis proyectos de modelado estadístico y análisis de datos.', 
+                title: 'Portafolio de Datos', nav_about: 'Sobre Mí', nav_projects: 'Proyectos',
+                hero_title: 'Portafolio | Datos y Riesgo', hero_subtitle: 'Explore mis proyectos de modelado estadístico y análisis de datos.',
                 about_content: 'Soy un profesional centrado en el Análisis de Datos y Riesgo, con una sólida base en Estadística y Ciencias Actuariales. Mis habilidades se concentran en el modelado, la fijación de precios y la transformación de datos complejos en valor estratégico.',
-                projects_title: 'Mis Proyectos',
-                filter_all: 'Todos',
-                filter_ml: 'Aprendizaje Automático',
-                filter_viz: 'Visualización',
-                filter_risk: 'Precios y Riesgo', 
-                no_projects: 'No se encontraron proyectos para este filtro.',
-                link_repo: 'Ver Repositorio',
-                link_demo: 'Ver Demo',
-                btn_projects: 'Ver Proyectos',
-                btn_contact: 'Contacto',
+                projects_title: 'Mis Proyectos', filter_all: 'Todos', filter_ml: 'Aprendizaje Automático',
+                filter_viz: 'Visualización', filter_risk: 'Precios y Riesgo', no_projects: 'No se encontraron proyectos para este filtro.',
+                link_repo: 'Ver Repositorio', link_demo: 'Ver Demo', btn_projects: 'Ver Proyectos', btn_contact: 'Contacto'
             }
         };
 
-        let currentLang = 'pt-BR'; // Idioma padrão
+        // --- 3. LÓGICA DE CARREGAMENTO (FETCH JSON) ---
+        async function loadProjects() {
+            try {
+                // Busca o arquivo projects.json que deve estar na mesma pasta
+                const response = await fetch('projects.json');
+                
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
 
-        // --- FUNÇÕES DE TRADUÇÃO E RENDERIZAÇÃO ---
+                projectsData = await response.json();
+                renderProjects('All');
+            } catch (error) {
+                console.error("Erro ao carregar projetos:", error);
+                const container = document.getElementById('project-container');
+                if(container) {
+                    container.innerHTML = `
+                        <div class="col-span-3 text-center p-8 bg-red-900/20 rounded-xl border border-red-800">
+                            <p class="text-red-400 font-bold">Erro ao carregar projetos</p>
+                            <p class="text-sm text-red-300 mt-2">Certifique-se de que o arquivo <code>projects.json</code> foi criado no GitHub.</p>
+                        </div>
+                    `;
+                }
+            }
+        }
 
-        /**
-         * Traduz todos os elementos do site com o atributo data-i18n.
-         * @param {string} langCode - Código do idioma (ex: 'pt-BR').
-         */
+        // --- 4. FUNÇÕES DE RENDERIZAÇÃO ---
         function translate(langCode) {
             currentLang = langCode;
             document.querySelectorAll('[data-i18n]').forEach(element => {
@@ -318,57 +207,37 @@
                     element.textContent = translations[langCode][key];
                 }
             });
+            // Se os projetos já carregaram, re-renderiza para atualizar o idioma deles
+            if(projectsData.length > 0) renderProjects(document.querySelector('.active-filter').getAttribute('data-filter'));
             
-            // Re-renderiza os projetos para aplicar a nova descrição/nome
-            renderProjects('All'); 
-
-            // Atualiza a URL (opcional, mas bom para acessibilidade)
             document.documentElement.lang = langCode.toLowerCase().substring(0, 2);
         }
 
-        /**
-         * Seleciona o idioma e exibe o conteúdo principal.
-         * @param {string} langCode - Código do idioma selecionado.
-         */
         function selectLanguage(langCode) {
             const langSelector = document.getElementById('lang-selector');
             const mainContent = document.getElementById('main-content');
             
-            // 1. Traduz o conteúdo
             translate(langCode);
             
-            // 2. Esconde o seletor de idioma
             langSelector.style.opacity = 0;
             setTimeout(() => {
                 langSelector.classList.add('hidden');
-                
-                // 3. Mostra o conteúdo principal com animação
                 mainContent.classList.remove('hidden');
                 setTimeout(() => {
                     mainContent.style.opacity = 1;
-                }, 50); // Pequeno delay para a transição
+                }, 50); 
             }, 500);
         }
 
-        /**
-         * Gera o HTML de um único card de projeto.
-         * @param {object} project - Objeto de projeto.
-         * @returns {string} HTML do card.
-         */
         function createProjectCard(project) {
             const projectName = project.name[currentLang] || project.name['pt-BR'];
             const projectDescription = project.description[currentLang] || project.description['pt-BR'];
             const repoText = translations[currentLang].link_repo;
             
-            // Switch para ícones
-            let icon = '⚙️'; // Default
-            if (project.type === 'ML') {
-                icon = '🧠';
-            } else if (project.type === 'Visualization') {
-                icon = '📊';
-            } else if (project.type === 'Risk') {
-                icon = '🛡️'; // Ícone de escudo para Risco/Pricing
-            }
+            let icon = '⚙️';
+            if (project.type === 'ML') icon = '🧠';
+            else if (project.type === 'Visualization') icon = '📊';
+            else if (project.type === 'Risk') icon = '🛡️';
 
             return `
                 <div class="bg-[#1a1a2e] p-6 rounded-2xl data-glow hover:scale-[1.02] transform transition duration-300">
@@ -376,7 +245,7 @@
                         <span class="text-3xl text-purple-400 mr-3">${icon}</span>
                         <h4 class="text-xl font-bold text-white">${projectName}</h4>
                     </div>
-                    <p class="text-gray-400 mb-4 text-sm">${projectDescription}</p>
+                    <p class="text-gray-400 mb-4 text-sm line-clamp-4">${projectDescription}</p>
                     
                     <div class="mb-4 flex flex-wrap gap-2">
                         ${project.tags.map(tag => `<span class="px-2 py-0.5 text-xs font-mono bg-purple-900/50 text-purple-300 rounded-full">${tag}</span>`).join('')}
@@ -384,19 +253,17 @@
 
                     <a href="${project.link}" target="_blank" class="inline-flex items-center text-sm font-medium text-purple-400 hover:text-purple-300 transition duration-200">
                         ${repoText}
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                     </a>
                 </div>
             `;
         }
 
-        /**
-         * Filtra e renderiza os cards de projeto.
-         * @param {string} filterType - O tipo de projeto a ser filtrado ('All', 'ML', 'Visualization', 'Risk').
-         */
         function renderProjects(filterType) {
             const container = document.getElementById('project-container');
             const noProjects = document.getElementById('no-projects');
+            
+            if (!container) return;
 
             const filteredProjects = projectsData.filter(project => 
                 filterType === 'All' || project.type === filterType
@@ -404,15 +271,16 @@
 
             container.innerHTML = filteredProjects.map(createProjectCard).join('');
 
-            if (filteredProjects.length === 0) {
-                noProjects.classList.remove('hidden');
-            } else {
-                noProjects.classList.add('hidden');
+            if (noProjects) {
+                if (filteredProjects.length === 0) {
+                    noProjects.classList.remove('hidden');
+                } else {
+                    noProjects.classList.add('hidden');
+                }
             }
         }
-        
-        // --- INICIALIZAÇÃO E LISTENERS ---
 
+        // --- 5. INICIALIZAÇÃO ---
         document.addEventListener('DOMContentLoaded', () => {
             const filterButtons = document.querySelectorAll('.filter-btn');
             
@@ -420,7 +288,6 @@
                 button.addEventListener('click', (e) => {
                     const filter = e.target.getAttribute('data-filter');
                     
-                    // Atualiza o estado visual do filtro
                     filterButtons.forEach(btn => {
                         btn.classList.remove('active-filter', 'bg-purple-600', 'hover:bg-purple-700', 'text-white');
                         btn.classList.add('bg-gray-700', 'hover:bg-purple-800/50', 'text-gray-300');
@@ -428,18 +295,14 @@
                     e.target.classList.add('active-filter', 'bg-purple-600', 'hover:bg-purple-700', 'text-white');
                     e.target.classList.remove('bg-gray-700', 'hover:bg-purple-800/50', 'text-gray-300');
 
-                    // Aplica a filtragem
                     renderProjects(filter);
                 });
             });
 
-            // Garante que os projetos sejam renderizados na carga inicial (após a seleção do idioma)
-            // A chamada é feita dentro de selectLanguage para garantir a tradução correta.
-            
-            // Define o idioma padrão na primeira renderização, mas não mostra o conteúdo ainda
+            // Inicia o carregamento
+            loadProjects();
             translate(currentLang);
         });
-
     </script>
 </body>
 </html>
