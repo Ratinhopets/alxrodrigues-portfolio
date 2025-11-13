@@ -1,31 +1,14 @@
-paths:
-  uploads: uploads
-  static: ''
+# 1. Diz ao CloudCannon onde estão os dados dos projetos
+data_config:
+  projects:
+    path: projects.json
+
+# 2. Força o ficheiro index.html a abrir sempre no modo Visual
 collections_config:
   pages:
-    path: ''
-    icon: wysiwyg
-    disable_url: false
-    disable_add: false
-    disable_add_folder: false
-    disable_file_actions: false
-timezone: America/Sao_Paulo
-markdown:
-  engine: commonmark
-  options:
-    xhtml: false
-    breaks: false
-    linkify: false
-    typographer: false
-    spaced_lists: false
-    sentence_per_line: false
-    gfm: false
-    code_block_fences: '```'
-    escape_snippets_in_code_blocks: false
-    treat_indentation_as_code: false
-    table: false
-    strikethrough: false
-    subscript: false
-    superscript: false
-    heading_ids: false
-    attributes: false
+    path: .
+    glob: ['index.html']
+    output: true
+
+# 3. Define o editor visual como padrão para evitar erros
+default_editor: visual
