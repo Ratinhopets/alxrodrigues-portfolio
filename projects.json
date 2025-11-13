@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "type": "Risk",
+    "tags": ["R", "GLM", "Pricing", "Atuarial"],
+    "link": "#",
+    "name": {
+      "pt-BR": "Modelagem GLM para Precificação de Seguros",
+      "en-US": "GLM Modeling for Insurance Pricing",
+      "es-ES": "Modelado GLM para la Fijación de Precios de Seguros"
+    },
+    "description": {
+      "pt-BR": "Construção e otimização de Modelos Lineares Generalizados (GLMs) para precificação...",
+      "en-US": "Construction and optimization of Generalized Linear Models (GLMs)...",
+      "es-ES": "Construcción y optimización de Modelos Lineales Generalizados (GLMs)..."
+    }
+  },
+  {
+    "id": 2,
+    "type": "ML",
+    "tags": ["Python", "GLM", "Risco", "Healthcare"],
+    "link": "#",
+    "name": {
+      "pt-BR": "Consultoria Estatística e Aplicação de GLMs em Saúde",
+      "en-US": "Statistical Consulting & GLM Application in Healthcare",
+      "es-ES": "Consultoría Estadística y Aplicación de GLMs en Salud"
+    },
+    "description": {
+      "pt-BR": "Consultoria para ajuste de risco em planos de saúde...",
+      "en-US": "Consulting for risk adjustment in health insurance...",
+      "es-ES": "Consultoría para el ajuste de riesgo en planes de salud..."
+    }
+  }
+]
