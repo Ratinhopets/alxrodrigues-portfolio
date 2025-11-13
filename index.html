@@ -3,611 +3,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard BI - Análise de Vendas</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <title data-i18n="title">Portfólio de Dados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Definindo a fonte Inter, padrão em Tailwind */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d1a; /* Fundo roxo escuro */
+            color: #e5e7eb; /* Texto cinza claro */
+            transition: background-color 0.5s;
         }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
+        .data-glow {
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); /* Sombra roxa sutil */
+            transition: box-shadow 0.3s ease-in-out;
         }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid #667eea;
+        .data-glow:hover {
+            box-shadow: 0 0 25px rgba(192, 132, 252, 0.7);
         }
-
-        .header h1 {
-            color: #333;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        .flag-button {
+            transition: transform 0.2s, opacity 0.2s;
         }
-
-        .controls {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
+        .flag-button:hover {
+            transform: scale(1.1);
         }
-
-        .data-source {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .data-source label {
-            font-weight: bold;
-            color: #333;
-        }
-
-        select, input, button {
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        select:focus, input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        button {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            min-width: 120px;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .kpi-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .kpi-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .kpi-value {
-            font-size: 2.5em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .kpi-label {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .chart-container {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .chart-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #667eea;
-            font-size: 1.2em;
-        }
-
-        .error {
-            background: #ff6b6b;
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .sql-config {
-            display: none;
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        .sql-config.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-group input {
-            width: 100%;
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 100px;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-family: monospace;
+        .flag-button-icon {
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>📊 Dashboard BI Interativo</h1>
-            <p>Análise de dados em tempo real com múltiplas fontes</p>
-        </div>
+<body class="min-h-screen">
 
-        <div class="controls">
-            <div class="data-source">
-                <label>Fonte de Dados:</label>
-                <select id="dataSource">
-                    <option value="demo">Dados Demo</option>
-                    <option value="csv">Upload CSV</option>
-                    <option value="sheets">Google Sheets</option>
-                    <option value="sql">SQL Database</option>
-                </select>
-            </div>
-
-            <input type="file" id="csvFile" accept=".csv" style="display: none;">
-            <input type="text" id="sheetsUrl" placeholder="URL do Google Sheets" style="display: none;">
+    <!-- 1. SELETOR DE IDIOMA INICIAL -->
+    <div id="lang-selector" class="fixed inset-0 bg-[#0d0d1a] z-50 flex flex-col items-center justify-center p-8 transition-opacity duration-500">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-12 text-purple-400 tracking-tight">
+            Selecione o Idioma
+        </h1>
+        <div class="flex space-x-8 md:space-x-16">
             
-            <button id="loadData">Carregar Dados</button>
-            <button id="refreshData">Atualizar</button>
-        </div>
+            <!-- Bandeira Brasil (PT-BR) -->
+            <button class="flag-button flex flex-col items-center group" onclick="selectLanguage('pt-BR')">
+                <span role="img" aria-label="Bandeira do Brasil" class="text-7xl flag-button-icon">🇧🇷</span>
+                <span class="mt-3 text-xl font-medium text-gray-300 group-hover:text-purple-300">Português BR</span>
+            </button>
 
-        <div id="sqlConfig" class="sql-config">
-            <h3>Configuração SQL</h3>
-            <div class="form-group">
-                <label>URL do Banco:</label>
-                <input type="text" id="sqlUrl" placeholder="https://api.exemplo.com/query">
-            </div>
-            <div class="form-group">
-                <label>Query SQL:</label>
-                <textarea id="sqlQuery" placeholder="SELECT * FROM vendas WHERE data >= '2024-01-01'"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Headers (JSON):</label>
-                <input type="text" id="sqlHeaders" placeholder='{"Authorization": "Bearer token", "Content-Type": "application/json"}'>
-            </div>
-        </div>
+            <!-- Bandeira EUA (EN-US) -->
+            <button class="flag-button flex flex-col items-center group" onclick="selectLanguage('en-US')">
+                <span role="img" aria-label="Bandeira dos EUA" class="text-7xl flag-button-icon">🇺🇸</span>
+                <span class="mt-3 text-xl font-medium text-gray-300 group-hover:text-purple-300">English US</span>
+            </button>
 
-        <div id="loading" class="loading" style="display: none;">
-            <p>⏳ Carregando dados...</p>
-        </div>
-
-        <div id="error" class="error" style="display: none;"></div>
-
-        <div id="kpiGrid" class="kpi-grid"></div>
-
-        <div id="chartsGrid" class="charts-grid">
-            <div class="chart-container">
-                <div class="chart-title">Vendas por Mês</div>
-                <canvas id="salesChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <div class="chart-title">Vendas por Categoria</div>
-                <canvas id="categoryChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <div class="chart-title">Top Vendedores</div>
-                <canvas id="sellersChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <div class="chart-title">Evolução Mensal</div>
-                <canvas id="trendChart"></canvas>
-            </div>
+            <!-- Bandeira Espanha (ES-ES) -->
+            <button class="flag-button flex flex-col items-center group" onclick="selectLanguage('es-ES')">
+                <span role="img" aria-label="Bandeira da Espanha" class="text-7xl flag-button-icon">🇪🇸</span>
+                <span class="mt-3 text-xl font-medium text-gray-300 group-hover:text-purple-300">Español ES</span>
+            </button>
         </div>
     </div>
 
+    <!-- 2. CONTEÚDO PRINCIPAL (Inicialmente Oculto) -->
+    <div id="main-content" class="opacity-0 hidden transition-opacity duration-500">
+        <header class="sticky top-0 z-40 backdrop-blur-md bg-[#0d0d1a]/80 shadow-lg border-b border-purple-900/50">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-purple-400 tracking-wider">
+                    <span class="text-3xl">&lt;/&gt;</span> Data.Dev
+                </h1>
+                <nav>
+                    <a href="#about" class="mx-3 text-gray-300 hover:text-purple-400 font-medium transition duration-200" data-i18n="nav_about">Sobre Mim</a>
+                    <a href="#projects" class="mx-3 text-gray-300 hover:text-purple-400 font-medium transition duration-200" data-i18n="nav_projects">Projetos</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+            <!-- HERO SECTION (GENERALIZADO) -->
+            <section id="hero" class="pt-24 pb-32 text-center">
+                <p class="text-lg font-mono text-purple-400 mb-4 animate-pulse">
+                    &gt; $ Bem-vindo.
+                </p>
+                <h2 class="text-6xl md:text-8xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500" data-i18n="hero_title">
+                    Portfólio | Data & Risco
+                </h2>
+                <p class="text-2xl md:text-3xl text-gray-400 max-w-3xl mx-auto" data-i18n="hero_subtitle">
+                    Explore meus projetos de modelagem estatística e análise de dados.
+                </p>
+                <div class="mt-10 flex justify-center space-x-4">
+                    <a href="#projects" class="px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl data-glow transition duration-300" data-i18n="btn_projects">
+                        Ver Projetos
+                    </a>
+                    <a href="mailto:contato@exemplo.com" class="px-8 py-3 bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold rounded-xl transition duration-300" data-i18n="btn_contact">
+                        Contato
+                    </a>
+                </div>
+            </section>
+
+            <!-- ABOUT ME SECTION (MUITO CONCISO) -->
+            <section id="about" class="py-20 border-t border-purple-900/50">
+                <h3 class="text-4xl font-bold text-center mb-12 text-purple-300" data-i18n="nav_about">Sobre Mim</h3>
+                <div class="max-w-4xl mx-auto bg-[#1a1a2e] p-8 rounded-2xl data-glow">
+                    <p class="text-lg leading-relaxed text-gray-300" data-i18n="about_content">
+                        Sou um profissional focado em Análise de Dados e Risco, com uma forte base em Estatística e Ciências Atuariais. Minhas habilidades se concentram em modelagem, precificação e transformação de dados complexos em valor estratégico.
+                    </p>
+                    <div class="mt-8 text-center">
+                        <span class="inline-block px-4 py-1 bg-purple-800/50 rounded-full text-sm font-mono text-purple-300">
+                            Atuarial | Pricing | GLMs | R | Python | SQL | Power BI
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROJECTS SECTION (DESTAQUE) -->
+            <section id="projects" class="py-20 border-t border-purple-900/50">
+                <h3 class="text-4xl font-bold text-center mb-12 text-purple-300" data-i18n="projects_title">Meus Projetos</h3>
+
+                <!-- Filtros Interativos -->
+                <div class="flex justify-center space-x-2 md:space-x-4 mb-12 flex-wrap">
+                    <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-purple-600 hover:bg-purple-700 text-white transition duration-300 active-filter" data-filter="All" data-i18n="filter_all">Todos</button>
+                    <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-gray-700 hover:bg-purple-800/50 text-gray-300 transition duration-300" data-filter="ML" data-i18n="filter_ml">Machine Learning</button>
+                    <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-gray-700 hover:bg-purple-800/50 text-gray-300 transition duration-300" data-filter="Visualization" data-i18n="filter_viz">Visualização</button>
+                    <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-gray-700 hover:bg-purple-800/50 text-gray-300 transition duration-300" data-filter="Risk" data-i18n="filter_risk">Pricing & Risco</button>
+                </div>
+
+                <!-- Container dos Cards de Projeto (Maior volume de conteúdo) -->
+                <div id="project-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Cards serão injetados aqui pelo JavaScript -->
+                </div>
+
+                <div id="no-projects" class="text-center mt-12 text-gray-500 hidden" data-i18n="no_projects">
+                    Nenhum projeto encontrado para este filtro.
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-16 py-8 border-t border-purple-900/50 text-center text-sm text-gray-500">
+            <p>&copy; 2024 Portfólio de Dados. Criado com 💜 e Tailwind CSS.</p>
+        </footer>
+    </div>
+
     <script>
-        // Dados demo para exemplo
-        const demoData = [
-            {data: '2024-01-15', vendedor: 'João Silva', categoria: 'Eletrônicos', valor: 1200, quantidade: 2},
-            {data: '2024-01-20', vendedor: 'Maria Santos', categoria: 'Roupas', valor: 800, quantidade: 4},
-            {data: '2024-02-10', vendedor: 'João Silva', categoria: 'Eletrônicos', valor: 2500, quantidade: 1},
-            {data: '2024-02-15', vendedor: 'Pedro Costa', categoria: 'Casa', valor: 1500, quantidade: 3},
-            {data: '2024-03-05', vendedor: 'Maria Santos', categoria: 'Roupas', valor: 900, quantidade: 5},
-            {data: '2024-03-12', vendedor: 'Ana Oliveira', categoria: 'Eletrônicos', valor: 3200, quantidade: 2},
-            {data: '2024-04-08', vendedor: 'Pedro Costa', categoria: 'Casa', valor: 1800, quantidade: 4},
-            {data: '2024-04-18', vendedor: 'João Silva', categoria: 'Eletrônicos', valor: 1600, quantidade: 3},
-            {data: '2024-05-03', vendedor: 'Ana Oliveira', categoria: 'Roupas', valor: 1100, quantidade: 6},
-            {data: '2024-05-15', vendedor: 'Maria Santos', categoria: 'Casa', valor: 2200, quantidade: 2}
+        // --- DADOS DO PORTFÓLIO E TRADUÇÕES (JSON) ---
+
+        // 1. DADOS DOS PROJETOS (6 PROJETOS COM FOCO EM ATUARIA/RISCO)
+        const projectsData = [
+            {
+                id: 1,
+                type: 'Risk', 
+                tags: ['R', 'GLM', 'Pricing', 'Atuarial'],
+                link: '#',
+                name: {
+                    'pt-BR': 'Modelagem GLM para Precificação de Seguros',
+                    'en-US': 'GLM Modeling for Insurance Pricing',
+                    'es-ES': 'Modelado GLM para la Fijación de Precios de Seguros'
+                },
+                description: {
+                    'pt-BR': 'Construção e otimização de Modelos Lineares Generalizados (GLMs) para precificação de produtos de seguro, focando na sinistralidade e na rentabilidade. Implementado em R e utilizado na função de Actuarial Analyst.',
+                    'en-US': 'Construction and optimization of Generalized Linear Models (GLMs) for insurance product pricing, focusing on loss ratio and profitability. Implemented in R and used in the Actuarial Analyst role.',
+                    'es-ES': 'Construcción y optimización de Modelos Lineales Generalizados (GLMs) para la fijación de precios de productos de seguros, enfocándose en la siniestralidad y la rentabilidad. Implementado en R y utilizado en el rol de Analista Actuarial.'
+                }
+            },
+            {
+                id: 2,
+                type: 'ML', 
+                tags: ['Python', 'GLM', 'Risco', 'Healthcare'],
+                link: '#',
+                name: {
+                    'pt-BR': 'Consultoria Estatística e Aplicação de GLMs em Saúde',
+                    'en-US': 'Statistical Consulting & GLM Application in Healthcare',
+                    'es-ES': 'Consultoría Estadística y Aplicación de GLMs en Salud'
+                },
+                description: {
+                    'pt-BR': 'Consultoria para ajuste de risco em planos de saúde (Best Doctors Insurance - EUA) utilizando GLMs para precificação e análise de sinistros, demonstrando expertise em modelagem estatística em ambiente remoto.',
+                    'en-US': 'Consulting for risk adjustment in health insurance (Best Doctors Insurance - USA) using GLMs for pricing and claims analysis, demonstrating statistical modeling expertise in a remote environment.',
+                    'es-ES': 'Consultoría para el ajuste de riesgo en planes de salud (Best Doctors Insurance - EE. UU.) utilizando GLMs para la fijación de precios y el análisis de siniestros, demostrando experiencia en modelado estadístico.'
+                }
+            },
+            {
+                id: 3,
+                type: 'Visualization',
+                tags: ['Power BI', 'R', 'Forecasting', 'KPIs'],
+                link: '#',
+                name: {
+                    'pt-BR': 'Dashboard de Forecasting e Análise de Risco (R/Power BI)',
+                    'en-US': 'Forecasting and Risk Analysis Dashboard (R/Power BI)',
+                    'es-ES': 'Panel de Pronóstico y Análisis de Riesgo (R/Power BI)'
+                },
+                description: {
+                    'pt-BR': 'Criação de dashboards em Power BI para monitoramento de KPIs e otimização de processos, aplicando distribuições de probabilidade em R para análises de risco e previsões de mercado.',
+                    'en-US': 'Creation of Power BI dashboards for KPI monitoring and process optimization, applying probability distributions in R for risk analysis and market forecasting.',
+                    'es-ES': 'Creación de paneles en Power BI para monitoreo de KPIs y optimización de procesos, aplicando distribuciones de probabilidad en R para análisis de riesgo y pronósticos de mercado.'
+                }
+            },
+            {
+                id: 4,
+                type: 'Visualization',
+                tags: ['R', 'Sentiment Analysis', 'Looker', 'BI'],
+                link: '#',
+                name: {
+                    'pt-BR': 'Análise de Sentimento e Dashboards Interativos (Looker)',
+                    'en-US': 'Sentiment Analysis and Interactive Dashboards (Looker)',
+                    'es-ES': 'Análisis de Sentimiento y Paneles Interactivos (Looker)'
+                },
+                description: {
+                    'pt-BR': 'Pesquisa em Business Intelligence focada em processamento e limpeza de dados (R) e análise de sentimento. Construção de dashboards interativos em Google Looker e Power BI para visualização pública de insights.',
+                    'en-US': 'Business Intelligence research focused on data processing and cleaning (R) and sentiment analysis. Construction of interactive dashboards in Google Looker and Power BI for public insight visualization.',
+                    'es-ES': 'Investigación en Business Intelligence enfocada en el procesamiento y limpieza de datos (R) y análisis de sentimiento. Construcción de paneles interactivos en Google Looker y Power BI para la visualización pública de insights.'
+                }
+            },
+            {
+                id: 5,
+                type: 'ML', 
+                tags: ['Python', 'Scikit-learn', 'Risco de Crédito'],
+                link: '#',
+                name: {
+                    'pt-BR': 'Modelo de Credit Scoring (Risco de Inadimplência)',
+                    'en-US': 'Credit Scoring Model (Default Risk)',
+                    'es-ES': 'Modelo de Puntuación de Crédito (Riesgo de Impago)'
+                },
+                description: {
+                    'pt-BR': 'Desenvolvimento de um modelo de classificação (Logistic Regression/Random Forest) para avaliar a probabilidade de inadimplência de clientes, auxiliando na decisão de concessão de crédito e mitigação de risco.',
+                    'en-US': 'Developed a classification model (Logistic Regression/Random Forest) to assess the probability of customer default, assisting in credit granting decisions and risk mitigation.',
+                    'es-ES': 'Desarrollo de un modelo de clasificación (Regresión Logística/Random Forest) para evaluar la probabilidad de impago de clientes, ayudando en la decisión de concesión de crédito y mitigación de riesgos.'
+                }
+            },
+            {
+                id: 6,
+                type: 'Visualization', 
+                tags: ['Power BI', 'Data Governance', 'UFRGS', 'SQL'],
+                link: '#',
+                name: {
+                    'pt-BR': 'Dashboards de Governança de Dados para Relatórios Públicos',
+                    'en-US': 'Data Governance Dashboards for Public Reporting',
+                    'es-ES': 'Paneles de Gobernanza de Datos para Informes Públicos'
+                },
+                description: {
+                    'pt-BR': 'Criação de dashboards internos e públicos em Power BI (FAURGS) para monitoramento de metadados e garantia da qualidade dos dados utilizados em relatórios institucionais e científicos.',
+                    'en-US': 'Creation of internal and public Power BI dashboards (FAURGS) for metadata monitoring and ensuring the data quality used in institutional and scientific reports.',
+                    'es-ES': 'Creación de paneles internos y públicos en Power BI (FAURGS) para la monitorización de metadatos y la garantía de la calidad de los datos utilizados en informes institucionales y científicos.'
+                }
+            }
         ];
 
-        let currentData = demoData;
-        let charts = {};
-
-        // Elementos DOM
-        const dataSourceSelect = document.getElementById('dataSource');
-        const csvFileInput = document.getElementById('csvFile');
-        const sheetsUrlInput = document.getElementById('sheetsUrl');
-        const sqlConfig = document.getElementById('sqlConfig');
-        const loadDataBtn = document.getElementById('loadData');
-        const refreshDataBtn = document.getElementById('refreshData');
-        const loading = document.getElementById('loading');
-        const errorDiv = document.getElementById('error');
-        const kpiGrid = document.getElementById('kpiGrid');
-
-        // Event listeners
-        dataSourceSelect.addEventListener('change', handleDataSourceChange);
-        loadDataBtn.addEventListener('click', loadData);
-        refreshDataBtn.addEventListener('click', refreshData);
-        csvFileInput.addEventListener('change', handleCSVUpload);
-
-        function handleDataSourceChange() {
-            const source = dataSourceSelect.value;
-            
-            // Esconder todos os inputs
-            csvFileInput.style.display = 'none';
-            sheetsUrlInput.style.display = 'none';
-            sqlConfig.classList.remove('active');
-            
-            // Mostrar input relevante
-            switch(source) {
-                case 'csv':
-                    csvFileInput.style.display = 'inline-block';
-                    break;
-                case 'sheets':
-                    sheetsUrlInput.style.display = 'inline-block';
-                    break;
-                case 'sql':
-                    sqlConfig.classList.add('active');
-                    break;
+        // 2. TRADUÇÕES GLOBAIS
+        const translations = {
+            'pt-BR': {
+                title: 'Portfólio de Dados',
+                nav_about: 'Sobre Mim',
+                nav_projects: 'Projetos',
+                hero_title: 'Portfólio | Data & Risco', 
+                hero_subtitle: 'Explore meus projetos de modelagem estatística e análise de dados.', 
+                about_content: 'Sou um profissional focado em Análise de Dados e Risco, com uma forte base em Estatística e Ciências Atuariais. Minhas habilidades se concentram em modelagem, precificação e transformação de dados complexos em valor estratégico.',
+                projects_title: 'Meus Projetos',
+                filter_all: 'Todos',
+                filter_ml: 'Machine Learning',
+                filter_viz: 'Visualização',
+                filter_risk: 'Pricing & Risco', 
+                no_projects: 'Nenhum projeto encontrado para este filtro.',
+                link_repo: 'Ver Repositório',
+                link_demo: 'Ver Demo',
+                btn_projects: 'Ver Projetos',
+                btn_contact: 'Contato',
+            },
+            'en-US': {
+                title: 'Data Portfolio',
+                nav_about: 'About Me',
+                nav_projects: 'Projects',
+                hero_title: 'Portfolio | Data & Risk', 
+                hero_subtitle: 'Explore my statistical modeling and data analysis projects.', 
+                about_content: 'I am a professional focused on Data and Risk Analysis, with a strong foundation in Statistics and Actuarial Science. My skills concentrate on modeling, pricing, and transforming complex data into strategic value.',
+                projects_title: 'My Projects',
+                filter_all: 'All',
+                filter_ml: 'Machine Learning',
+                filter_viz: 'Visualization',
+                filter_risk: 'Pricing & Risk', 
+                no_projects: 'No projects found for this filter.',
+                link_repo: 'View Repository',
+                link_demo: 'View Demo',
+                btn_projects: 'View Projects',
+                btn_contact: 'Contact',
+            },
+            'es-ES': {
+                title: 'Portafolio de Datos',
+                nav_about: 'Sobre Mí',
+                nav_projects: 'Proyectos',
+                hero_title: 'Portafolio | Datos y Riesgo', 
+                hero_subtitle: 'Explore mis proyectos de modelado estadístico y análisis de datos.', 
+                about_content: 'Soy un profesional centrado en el Análisis de Datos y Riesgo, con una sólida base en Estadística y Ciencias Actuariales. Mis habilidades se concentran en el modelado, la fijación de precios y la transformación de datos complejos en valor estratégico.',
+                projects_title: 'Mis Proyectos',
+                filter_all: 'Todos',
+                filter_ml: 'Aprendizaje Automático',
+                filter_viz: 'Visualización',
+                filter_risk: 'Precios y Riesgo', 
+                no_projects: 'No se encontraron proyectos para este filtro.',
+                link_repo: 'Ver Repositorio',
+                link_demo: 'Ver Demo',
+                btn_projects: 'Ver Proyectos',
+                btn_contact: 'Contacto',
             }
-        }
+        };
 
-        function showLoading() {
-            loading.style.display = 'block';
-            errorDiv.style.display = 'none';
-        }
+        let currentLang = 'pt-BR'; // Idioma padrão
 
-        function hideLoading() {
-            loading.style.display = 'none';
-        }
+        // --- FUNÇÕES DE TRADUÇÃO E RENDERIZAÇÃO ---
 
-        function showError(message) {
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-            hideLoading();
-        }
-
-        async function loadData() {
-            const source = dataSourceSelect.value;
-            
-            try {
-                showLoading();
-                
-                switch(source) {
-                    case 'demo':
-                        currentData = demoData;
-                        break;
-                    case 'csv':
-                        if (!csvFileInput.files[0]) {
-                            throw new Error('Selecione um arquivo CSV');
-                        }
-                        await loadCSVData();
-                        break;
-                    case 'sheets':
-                        await loadSheetsData();
-                        break;
-                    case 'sql':
-                        await loadSQLData();
-                        break;
+        /**
+         * Traduz todos os elementos do site com o atributo data-i18n.
+         * @param {string} langCode - Código do idioma (ex: 'pt-BR').
+         */
+        function translate(langCode) {
+            currentLang = langCode;
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[langCode] && translations[langCode][key]) {
+                    element.textContent = translations[langCode][key];
                 }
-                
-                updateDashboard();
-                hideLoading();
-                
-            } catch (error) {
-                showError('Erro ao carregar dados: ' + error.message);
-            }
-        }
-
-        async function loadCSVData() {
-            return new Promise((resolve, reject) => {
-                const file = csvFileInput.files[0];
-                Papa.parse(file, {
-                    header: true,
-                    skipEmptyLines: true,
-                    dynamicTyping: true,
-                    complete: function(results) {
-                        if (results.errors.length > 0) {
-                            reject(new Error('Erro ao processar CSV: ' + results.errors[0].message));
-                        } else {
-                            currentData = results.data;
-                            resolve();
-                        }
-                    },
-                    error: function(error) {
-                        reject(error);
-                    }
-                });
             });
+            
+            // Re-renderiza os projetos para aplicar a nova descrição/nome
+            renderProjects('All'); 
+
+            // Atualiza a URL (opcional, mas bom para acessibilidade)
+            document.documentElement.lang = langCode.toLowerCase().substring(0, 2);
         }
 
-        async function loadSheetsData() {
-            const url = sheetsUrlInput.value;
-            if (!url) {
-                throw new Error('Digite a URL do Google Sheets');
-            }
+        /**
+         * Seleciona o idioma e exibe o conteúdo principal.
+         * @param {string} langCode - Código do idioma selecionado.
+         */
+        function selectLanguage(langCode) {
+            const langSelector = document.getElementById('lang-selector');
+            const mainContent = document.getElementById('main-content');
             
-            // Converter URL do Google Sheets para CSV
-            const csvUrl = url.replace('/edit#gid=', '/export?format=csv&gid=')
-                             .replace('/edit', '/export?format=csv');
+            // 1. Traduz o conteúdo
+            translate(langCode);
             
-            try {
-                const response = await fetch(csvUrl);
-                if (!response.ok) {
-                    throw new Error('Erro ao acessar Google Sheets. Verifique se o documento é público.');
-                }
+            // 2. Esconde o seletor de idioma
+            langSelector.style.opacity = 0;
+            setTimeout(() => {
+                langSelector.classList.add('hidden');
                 
-                const csvText = await response.text();
-                
-                return new Promise((resolve, reject) => {
-                    Papa.parse(csvText, {
-                        header: true,
-                        skipEmptyLines: true,
-                        dynamicTyping: true,
-                        complete: function(results) {
-                            currentData = results.data;
-                            resolve();
-                        },
-                        error: reject
-                    });
-                });
-            } catch (error) {
-                throw new Error('Erro ao carregar Google Sheets: ' + error.message);
-            }
+                // 3. Mostra o conteúdo principal com animação
+                mainContent.classList.remove('hidden');
+                setTimeout(() => {
+                    mainContent.style.opacity = 1;
+                }, 50); // Pequeno delay para a transição
+            }, 500);
         }
 
-        async function loadSQLData() {
-            const url = document.getElementById('sqlUrl').value;
-            const query = document.getElementById('sqlQuery').value;
-            const headersText = document.getElementById('sqlHeaders').value;
+        /**
+         * Gera o HTML de um único card de projeto.
+         * @param {object} project - Objeto de projeto.
+         * @returns {string} HTML do card.
+         */
+        function createProjectCard(project) {
+            const projectName = project.name[currentLang] || project.name['pt-BR'];
+            const projectDescription = project.description[currentLang] || project.description['pt-BR'];
+            const repoText = translations[currentLang].link_repo;
             
-            if (!url || !query) {
-                throw new Error('Configure a URL e a query SQL');
+            // Switch para ícones
+            let icon = '⚙️'; // Default
+            if (project.type === 'ML') {
+                icon = '🧠';
+            } else if (project.type === 'Visualization') {
+                icon = '📊';
+            } else if (project.type === 'Risk') {
+                icon = '🛡️'; // Ícone de escudo para Risco/Pricing
             }
-            
-            let headers = {'Content-Type': 'application/json'};
-            if (headersText) {
-                try {
-                    headers = {...headers, ...JSON.parse(headersText)};
-                } catch (e) {
-                    throw new Error('Headers inválidos. Use formato JSON válido.');
-                }
-            }
-            
-            try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: headers,
-                    body: JSON.stringify({ query: query })
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`Erro HTTP: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                currentData = Array.isArray(data) ? data : data.data || data.results || [];
-                
-            } catch (error) {
-                throw new Error('Erro ao conectar com SQL: ' + error.message);
-            }
-        }
 
-        function refreshData() {
-            loadData();
-        }
+            return `
+                <div class="bg-[#1a1a2e] p-6 rounded-2xl data-glow hover:scale-[1.02] transform transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl text-purple-400 mr-3">${icon}</span>
+                        <h4 class="text-xl font-bold text-white">${projectName}</h4>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm">${projectDescription}</p>
+                    
+                    <div class="mb-4 flex flex-wrap gap-2">
+                        ${project.tags.map(tag => `<span class="px-2 py-0.5 text-xs font-mono bg-purple-900/50 text-purple-300 rounded-full">${tag}</span>`).join('')}
+                    </div>
 
-        function updateDashboard() {
-            if (!currentData || currentData.length === 0) {
-                showError('Nenhum dado disponível');
-                return;
-            }
-            
-            updateKPIs();
-            updateCharts();
-        }
-
-        function updateKPIs() {
-            const totalVendas = currentData.reduce((sum, item) => sum + (item.valor || 0), 0);
-            const totalQuantidade = currentData.reduce((sum, item) => sum + (item.quantidade || 0), 0);
-            const ticketMedio = totalVendas / currentData.length;
-            const vendedoresUnicos = new Set(currentData.map(item => item.vendedor)).size;
-            
-            const kpis = [
-                { label: 'Total de Vendas', value: 'R$ ' + totalVendas.toLocaleString('pt-BR') },
-                { label: 'Ticket Médio', value: 'R$ ' + ticketMedio.toFixed(2).replace('.', ',') },
-                { label: 'Qtd. Vendida', value: totalQuantidade.toLocaleString('pt-BR') },
-                { label: 'Vendedores', value: vendedoresUnicos }
-            ];
-            
-            kpiGrid.innerHTML = kpis.map(kpi => `
-                <div class="kpi-card">
-                    <div class="kpi-value">${kpi.value}</div>
-                    <div class="kpi-label">${kpi.label}</div>
+                    <a href="${project.link}" target="_blank" class="inline-flex items-center text-sm font-medium text-purple-400 hover:text-purple-300 transition duration-200">
+                        ${repoText}
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </a>
                 </div>
-            `).join('');
+            `;
         }
 
-        function updateCharts() {
-            // Destruir gráficos existentes
-            Object.values(charts).forEach(chart => chart.destroy());
-            charts = {};
-            
-            // Vendas por mês
-            const salesByMonth = {};
-            currentData.forEach(item => {
-                const month = new Date(item.data).toLocaleDateString('pt-BR', {month: 'long', year: 'numeric'});
-                salesByMonth[month] = (salesByMonth[month] || 0) + item.valor;
-            });
-            
-            charts.sales = new Chart(document.getElementById('salesChart'), {
-                type: 'line',
-                data: {
-                    labels: Object.keys(salesByMonth),
-                    datasets: [{
-                        label: 'Vendas (R$)',
-                        data: Object.values(salesByMonth),
-                        borderColor: '#667eea',
-                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false }
-                    }
-                }
-            });
-            
-            // Vendas por categoria
-            const salesByCategory = {};
-            currentData.forEach(item => {
-                salesByCategory[item.categoria] = (salesByCategory[item.categoria] || 0) + item.valor;
-            });
-            
-            charts.category = new Chart(document.getElementById('categoryChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(salesByCategory),
-                    datasets: [{
-                        data: Object.values(salesByCategory),
-                        backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { position: 'bottom' }
-                    }
-                }
-            });
-            
-            // Top vendedores
-            const salesBySeller = {};
-            currentData.forEach(item => {
-                salesBySeller[item.vendedor] = (salesBySeller[item.vendedor] || 0) + item.valor;
-            });
-            
-            charts.sellers = new Chart(document.getElementById('sellersChart'), {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(salesBySeller),
-                    datasets: [{
-                        label: 'Vendas (R$)',
-                        data: Object.values(salesBySeller),
-                        backgroundColor: 'rgba(102, 126, 234, 0.8)'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false }
-                    }
-                }
-            });
-            
-            // Evolução mensal
-            charts.trend = new Chart(document.getElementById('trendChart'), {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(salesByMonth),
-                    datasets: [{
-                        label: 'Vendas (R$)',
-                        data: Object.values(salesByMonth),
-                        backgroundColor: 'linear-gradient(45deg, #667eea, #764ba2)'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false }
-                    }
-                }
-            });
-        }
+        /**
+         * Filtra e renderiza os cards de projeto.
+         * @param {string} filterType - O tipo de projeto a ser filtrado ('All', 'ML', 'Visualization', 'Risk').
+         */
+        function renderProjects(filterType) {
+            const container = document.getElementById('project-container');
+            const noProjects = document.getElementById('no-projects');
 
-        function handleCSVUpload() {
-            if (csvFileInput.files[0]) {
-                loadData();
+            const filteredProjects = projectsData.filter(project => 
+                filterType === 'All' || project.type === filterType
+            );
+
+            container.innerHTML = filteredProjects.map(createProjectCard).join('');
+
+            if (filteredProjects.length === 0) {
+                noProjects.classList.remove('hidden');
+            } else {
+                noProjects.classList.add('hidden');
             }
         }
+        
+        // --- INICIALIZAÇÃO E LISTENERS ---
 
-        // Inicializar dashboard
-        updateDashboard();
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const filter = e.target.getAttribute('data-filter');
+                    
+                    // Atualiza o estado visual do filtro
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active-filter', 'bg-purple-600', 'hover:bg-purple-700', 'text-white');
+                        btn.classList.add('bg-gray-700', 'hover:bg-purple-800/50', 'text-gray-300');
+                    });
+                    e.target.classList.add('active-filter', 'bg-purple-600', 'hover:bg-purple-700', 'text-white');
+                    e.target.classList.remove('bg-gray-700', 'hover:bg-purple-800/50', 'text-gray-300');
+
+                    // Aplica a filtragem
+                    renderProjects(filter);
+                });
+            });
+
+            // Garante que os projetos sejam renderizados na carga inicial (após a seleção do idioma)
+            // A chamada é feita dentro de selectLanguage para garantir a tradução correta.
+            
+            // Define o idioma padrão na primeira renderização, mas não mostra o conteúdo ainda
+            translate(currentLang);
+        });
+
     </script>
 </body>
 </html>
