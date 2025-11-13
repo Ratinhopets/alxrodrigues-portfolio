@@ -2,7 +2,12 @@
   {
     "id": 1,
     "type": "Risk",
-    "tags": ["R", "GLM", "Pricing", "Atuarial"],
+    "tags": [
+      "R",
+      "GLM",
+      "Pricing",
+      "Atuarial"
+    ],
     "link": "#",
     "name": {
       "pt-BR": "Modelagem GLM para Precificação de Seguros",
@@ -18,7 +23,12 @@
   {
     "id": 2,
     "type": "ML",
-    "tags": ["Python", "GLM", "Risco", "Healthcare"],
+    "tags": [
+      "Python",
+      "GLM",
+      "Risco",
+      "Healthcare"
+    ],
     "link": "#",
     "name": {
       "pt-BR": "Consultoria Estatística e Aplicação de GLMs em Saúde",
@@ -29,6 +39,24 @@
       "pt-BR": "Consultoria para ajuste de risco em planos de saúde...",
       "en-US": "Consulting for risk adjustment in health insurance...",
       "es-ES": "Consultoría para el ajuste de riesgo en planes de salud..."
+    }
+  },
+  {
+    "id": 0,
+    "type": "",
+    "tags": [
+      ""
+    ],
+    "link": "",
+    "name": {
+      "pt-BR": "",
+      "en-US": "",
+      "es-ES": ""
+    },
+    "description": {
+      "pt-BR": "",
+      "en-US": "",
+      "es-ES": ""
     }
   }
 ]
