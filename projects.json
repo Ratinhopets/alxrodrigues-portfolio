@@ -1,62 +1,92 @@
 [
   {
-    "id": 1,
+    "name": {
+      "pt-BR": "Modelo de Precificação (GLM)",
+      "en-US": "Pricing Model (GLM)",
+      "es-ES": "Modelo de Precios (GLM)"
+    },
+    "description": {
+      "pt-BR": "Desenvolvimento de um Modelo Linear Generalizado (GLM) para precificação de seguros auto, otimizando a tarifa com base no risco.",
+      "en-US": "Development of a Generalized Linear Model (GLM) for auto insurance pricing, optimizing tariffs based on risk.",
+      "es-ES": "Desarrollo de un Modelo Lineal Generalizado (GLM) para la tarificación de seguros de auto, optimizando la tarifa según el riesgo."
+    },
     "type": "Risk",
-    "tags": [
-      "R",
-      "GLM",
-      "Pricing",
-      "Atuarial"
-    ],
-    "link": "#",
-    "name": {
-      "pt-BR": "Modelagem GLM para Precificação de Seguros",
-      "en-US": "GLM Modeling for Insurance Pricing",
-      "es-ES": "Modelado GLM para la Fijación de Precios de Seguros"
-    },
-    "description": {
-      "pt-BR": "Construção e otimização de Modelos Lineares Generalizados (GLMs) para precificação...",
-      "en-US": "Construction and optimization of Generalized Linear Models (GLMs)...",
-      "es-ES": "Construcción y optimización de Modelos Lineales Generalizados (GLMs)..."
-    }
+    "tags": ["R", "GLM", "Atuarial", "Pricing"],
+    "link": "https://github.com/example/pricing-glm"
   },
   {
-    "id": 2,
+    "name": {
+      "pt-BR": "Previsão de Churn (ML)",
+      "en-US": "Churn Prediction (ML)",
+      "es-ES": "Predicción de Abandono (ML)"
+    },
+    "description": {
+      "pt-BR": "Modelo de Machine Learning (Random Forest) para prever a probabilidade de churn de clientes em um serviço de assinatura.",
+      "en-US": "Machine Learning model (Random Forest) to predict customer churn probability in a subscription service.",
+      "es-ES": "Modelo de Machine Learning (Random Forest) para predecir la probabilidad de abandono de clientes en un servicio de suscripción."
+    },
     "type": "ML",
-    "tags": [
-      "Python",
-      "GLM",
-      "Risco",
-      "Healthcare"
-    ],
-    "link": "#",
-    "name": {
-      "pt-BR": "Consultoria Estatística e Aplicação de GLMs em Saúde",
-      "en-US": "Statistical Consulting & GLM Application in Healthcare",
-      "es-ES": "Consultoría Estadística y Aplicación de GLMs en Salud"
-    },
-    "description": {
-      "pt-BR": "Consultoria para ajuste de risco em planos de saúde...",
-      "en-US": "Consulting for risk adjustment in health insurance...",
-      "es-ES": "Consultoría para el ajuste de riesgo en planes de salud..."
-    }
+    "tags": ["Python", "Scikit-learn", "Random Forest"],
+    "link": "https://github.com/example/churn-prediction"
   },
   {
-    "id": 0,
-    "type": "",
-    "tags": [
-      ""
-    ],
-    "link": "",
     "name": {
-      "pt-BR": "",
-      "en-US": "",
-      "es-ES": ""
+      "pt-BR": "Dashboard de Vendas (Power BI)",
+      "en-US": "Sales Dashboard (Power BI)",
+      "es-ES": "Dashboard de Ventas (Power BI)"
     },
     "description": {
-      "pt-BR": "",
-      "en-US": "",
-      "es-ES": ""
-    }
+      "pt-BR": "Criação de um dashboard interativo no Power BI para monitoramento de KPIs de vendas em tempo real, com ETL em SQL.",
+      "en-US": "Creation of an interactive dashboard in Power BI for real-time sales KPI monitoring, with ETL in SQL.",
+      "es-ES": "Creación de un dashboard interactivo en Power BI para el seguimiento de KPIs de ventas en tiempo real, con ETL en SQL."
+    },
+    "type": "Visualization",
+    "tags": ["Power BI", "SQL", "DAX", "ETL"],
+    "link": "https://github.com/example/sales-dashboard"
+  },
+  {
+    "name": {
+      "pt-BR": "Análise de Frequência de Sinistros",
+      "en-US": "Claims Frequency Analysis",
+      "es-ES": "Análisis de Frecuencia de Siniestros"
+    },
+    "description": {
+      "pt-BR": "Estudo atuarial sobre a frequência de sinistros, ajustando uma distribuição de Poisson e identificando fatores de risco.",
+      "en-US": "Actuarial study on claims frequency, fitting a Poisson distribution and identifying risk factors.",
+      "es-ES": "Estudio actuarial sobre la frecuencia de siniestros, ajustando una distribución de Poisson e identificando factores de riesgo."
+    },
+    "type": "Risk",
+    "tags": ["R", "Estatística", "Poisson"],
+    "link": "https://github.com/example/claims-frequency"
+  },
+  {
+    "name": {
+      "pt-BR": "Segmentação de Clientes (K-Means)",
+      "en-US": "Customer Segmentation (K-Means)",
+      "es-ES": "Segmentación de Clientes (K-Means)"
+    },
+    "description": {
+      "pt-BR": "Uso do algoritmo K-Means para agrupar clientes com base em comportamento de compra, auxiliando em estratégias de marketing.",
+      "en-US": "Using the K-Means algorithm to group customers based on purchasing behavior, aiding marketing strategies.",
+      "es-ES": "Uso del algoritmo K-Means para agrupar clientes según su comportamiento de compra, ayudando en estrategias de marketing."
+    },
+    "type": "ML",
+    "tags": ["Python", "K-Means", "Pandas"],
+    "link": "https://github.com/example/customer-segmentation"
+  },
+  {
+    "name": {
+      "pt-BR": "Gráfico Simples de Teste",
+      "en-US": "Simple Test Chart",
+      "es-ES": "Gráfico Simple de Prueba"
+    },
+    "description": {
+      "pt-BR": "Um projeto de visualização simples usando Chart.js para testar a funcionalidade do link.",
+      "en-US": "A simple visualization project using Chart.js to test link functionality.",
+      "es-ES": "Un proyecto simple de visualización usando Chart.js para probar la funcionalidad del enlace."
+    },
+    "type": "Visualization",
+    "tags": ["JavaScript", "Chart.js", "Teste"],
+    "link": "https://www.chartjs.org/docs/latest/"
   }
 ]
