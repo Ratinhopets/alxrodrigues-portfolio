@@ -1,153 +1,29 @@
 [
   {
-    "id": "glm-pricing",
+    "id": "internal-chart-test",
     "name": {
-      "pt-BR": "Modelo de Precificação (GLM)",
-      "en-US": "Pricing Model (GLM)",
-      "es-ES": "Modelo de Precios (GLM)"
+      "pt-BR": "Visualização Interna (Chart.js)",
+      "en-US": "Internal Visualization (Chart.js)",
+      "es-ES": "Visualización Interna (Chart.js)"
     },
     "description": {
-      "pt-BR": "Desenvolvimento de um Modelo Linear Generalizado (GLM) para precificação de seguros auto, otimizando a tarifa com base no risco.",
-      "en-US": "Development of a Generalized Linear Model (GLM) for auto insurance pricing, optimizing tariffs based on risk.",
-      "es-ES": "Desarrollo de un Modelo Lineal Generalizado (GLM) para la tarificación de seguros de auto, optimizando la tarifa según el riesgo."
-    },
-    "type": "Risk",
-    "tags": ["R", "GLM", "Atuarial", "Pricing"],
-    "link": "https://github.com/example/pricing-glm",
-    "modalContent": {
-      "longDescription": {
-        "pt-BR": "Este projeto foca no desenvolvimento de um Modelo Linear Generalizado (GLM) robusto para a precificação de apólices de seguro automotivo.\n\nO objetivo principal é analisar dados históricos de sinistros e características dos segurados para identificar fatores de risco significativos, permitindo assim uma tarifação mais justa e precisa.",
-        "en-US": "This project focuses on developing a robust Generalized Linear Model (GLM) for pricing auto insurance policies.\n\nThe main objective is to analyze historical claims data and policyholder characteristics to identify significant risk factors, thus allowing for fairer and more accurate pricing.",
-        "es-ES": "Este proyecto se centra en el desarrollo de un Modelo Lineal Generalizado (GLM) robusto para la tarificación de pólizas de seguro de auto.\n\nEl objetivo principal es analizar datos históricos de siniestros y características de los asegurados para identificar factores de riesgo significativos, permitiendo así una tarificación más justa y precisa."
-      },
-      "image": "https://placehold.co/800x400/1a1a2e/c4b5fd?text=Análise+de+Risco+GLM",
-      "repoLink": "https://github.com/example/pricing-glm"
-    }
-  },
-  {
-    "id": "churn-prediction",
-    "name": {
-      "pt-BR": "Previsão de Churn (ML)",
-      "en-US": "Churn Prediction (ML)",
-      "es-ES": "Predicción de Abandono (ML)"
-    },
-    "description": {
-      "pt-BR": "Modelo de Machine Learning (Random Forest) para prever a probabilidade de churn de clientes em um serviço de assinatura.",
-      "en-US": "Machine Learning model (Random Forest) to predict customer churn probability in a subscription service.",
-      "es-ES": "Modelo de Machine Learning (Random Forest) para predecir la probabilidad de abandono de clientes en un servicio de suscripción."
-    },
-    "type": "ML",
-    "tags": ["Python", "Scikit-learn", "Random Forest"],
-    "link": "https://github.com/example/churn-prediction",
-    "modalContent": {
-      "longDescription": {
-        "pt-BR": "Utilizando um conjunto de dados de clientes de um serviço de assinatura, este projeto implementa um modelo de Random Forest para prever a probabilidade de um cliente cancelar o serviço (churn).\n\nA análise inclui engenharia de features, ajuste de hiperparâmetros e avaliação da importância de cada variável para o modelo.",
-        "en-US": "Using a dataset from a subscription service's customers, this project implements a Random Forest model to predict the likelihood of a customer canceling the service (churn).\n\nThe analysis includes feature engineering, hyperparameter tuning, and evaluation of variable importance for the model.",
-        "es-ES": "Utilizando un conjunto de datos de clientes de un servicio de suscripción, este proyecto implementa un modelo de Random Forest para predecir la probabilidad de que un cliente cancele el servicio (churn).\n\nEl análisis incluye ingeniería de características, ajuste de hiperparámetros y evaluación de la importancia de cada variable para el modelo."
-      },
-      "image": "https://placehold.co/800x400/1a1a2e/c4b5fd?text=Previsão+de+Churn+ML",
-      "repoLink": "https://github.com/example/churn-prediction"
-    }
-  },
-  {
-    "id": "sales-dashboard",
-    "name": {
-      "pt-BR": "Dashboard de Vendas (Power BI)",
-      "en-US": "Sales Dashboard (Power BI)",
-      "es-ES": "Dashboard de Ventas (Power BI)"
-    },
-    "description": {
-      "pt-BR": "Criação de um dashboard interativo no Power BI para monitoramento de KPIs de vendas em tempo real, com ETL em SQL.",
-      "en-US": "Creation of an interactive dashboard in Power BI for real-time sales KPI monitoring, with ETL in SQL.",
-      "es-ES": "Creación de un dashboard interactivo en Power BI para el seguimiento de KPIs de ventas en tiempo real, con ETL en SQL."
+      "pt-BR": "Um teste interno que abre detalhes dentro do próprio site, contendo um gráfico simples.",
+      "en-US": "An internal test that opens details inside the site, containing a simple chart.",
+      "es-ES": "Una prueba interna que abre detalles dentro del sitio, con un gráfico simple."
     },
     "type": "Visualization",
-    "tags": ["Power BI", "SQL", "DAX", "ETL"],
-    "link": "https://github.com/example/sales-dashboard",
+    "tags": ["Chart.js", "JavaScript", "Demo Interna"],
+    "link": "#internal-project",
     "modalContent": {
       "longDescription": {
-        "pt-BR": "Este projeto envolveu o processo completo de Business Intelligence: desde a extração e transformação de dados (ETL) de múltiplas fontes usando SQL, até a modelagem de dados e criação de visualizações interativas no Power BI.\n\nO dashboard permite que os gestores monitorem KPIs de vendas, performance de vendedores e tendências de mercado em tempo real.",
-        "en-US": "This project involved the complete Business Intelligence process: from data extraction and transformation (ETL) from multiple sources using SQL, to data modeling and creating interactive visualizations in Power BI.\n\nThe dashboard allows managers to monitor sales KPIs, seller performance, and market trends in real-time.",
-        "es-ES": "Este proyecto involucró el proceso completo de Business Intelligence: desde la extracción y transformación de datos (ETL) de múltiples fuentes usando SQL, hasta el modelado de datos y la creación de visualizaciones interactivas en Power BI.\n\nEl dashboard permite a los gerentes monitorear KPIs de ventas, rendimiento de vendedores y tendencias del mercado en tiempo real."
+        "pt-BR": "Projeto criado para testar exibição interna de detalhes no próprio site. Inclui um gráfico simples para visualização.",
+        "en-US": "Project created to test internal display of details inside the website. Includes a simple chart.",
+        "es-ES": "Proyecto creado para probar la visualización interna dentro del sitio web. Incluye un gráfico simple."
       },
-      "image": "https://placehold.co/800x400/1a1a2e/c4b5fd?text=Dashboard+Power+BI",
-      "repoLink": "https://github.com/example/sales-dashboard"
-    }
-  },
-  {
-    "id": "claims-frequency",
-    "name": {
-      "pt-BR": "Análise de Frequência de Sinistros",
-      "en-US": "Claims Frequency Analysis",
-      "es-ES": "Análisis de Frecuencia de Siniestros"
-    },
-    "description": {
-      "pt-BR": "Estudo atuarial sobre a frequência de sinistros, ajustando uma distribuição de Poisson e identificando fatores de risco.",
-      "en-US": "Actuarial study on claims frequency, fitting a Poisson distribution and identifying risk factors.",
-      "es-ES": "Estudio actuarial sobre la frecuencia de siniestros, ajustando una distribución de Poisson e identificando factores de riesgo."
-    },
-    "type": "Risk",
-    "tags": ["R", "Estatística", "Poisson"],
-    "link": "https://github.com/example/claims-frequency",
-    "modalContent": {
-      "longDescription": {
-        "pt-BR": "Análise estatística da frequência de sinistros de uma carteira de seguros. O estudo utiliza a linguagem R para ajustar um modelo de regressão de Poisson aos dados, identificando quais variáveis (como idade do condutor, região e tipo de veículo) impactam a probabilidade de ocorrência de um sinistro.",
-        "en-US": "Statistical analysis of claims frequency in an insurance portfolio. The study uses the R language to fit a Poisson regression model to the data, identifying which variables (such as driver's age, region, and vehicle type) impact the probability of a claim occurring.",
-        "es-ES": "Análisis estadístico de la frecuencia de siniestros de una cartera de seguros. El estudio utiliza el lenguaje R para ajustar un modelo de regresión de Poisson a los datos, identificando qué variables (como la edad del conductor, la región y el tipo de vehículo) impactan la probabilidad de que ocurra un siniestro."
-      },
-      "image": "https://placehold.co/800x400/1a1a2e/c4b5fd?text=Regressão+de+Poisson",
-      "repoLink": "https://github.com/example/claims-frequency"
-    }
-  },
-  {
-    "id": "customer-segmentation",
-    "name": {
-      "pt-BR": "Segmentação de Clientes (K-Means)",
-      "en-US": "Customer Segmentation (K-Means)",
-      "es-ES": "Segmentación de Clientes (K-Means)"
-    },
-    "description": {
-      "pt-BR": "Uso do algoritmo K-Means para agrupar clientes com base em comportamento de compra, auxiliando em estratégias de marketing.",
-      "en-US": "Using the K-Means algorithm to group customers based on purchasing behavior, aiding marketing strategies.",
-      "es-ES": "Uso del algoritmo K-Means para agrupar clientes según su comportamiento de compra, ayudando en estrategias de marketing."
-    },
-    "type": "ML",
-    "tags": ["Python", "K-Means", "Pandas"],
-    "link": "https://github.com/example/customer-segmentation",
-    "modalContent": {
-      "longDescription": {
-        "pt-BR": "Este projeto aplica o algoritmo de clusterização não supervisionada K-Means para segmentar clientes com base em métricas como valor total de compras, frequência e recência (RFM). \n\nA segmentação permite que a equipe de marketing crie campanhas direcionadas e personalizadas para cada grupo (cluster) de clientes.",
-        "en-US": "This project applies the K-Means unsupervised clustering algorithm to segment customers based on metrics like total purchase value, frequency, and recency (RFM).\n\nThe segmentation allows the marketing team to create targeted and personalized campaigns for each customer group (cluster).",
-        "es-ES": "Este proyecto aplica el algoritmo de agrupación no supervisada K-Means para segmentar clientes basándose en métricas como el valor total de compra, la frecuencia y la recencia (RFM).\n\nLa segmentación permite al equipo de marketing crear campañas dirigidas y personalizadas para cada grupo (clúster) de clientes."
-      },
-      "image": "https://placehold.co/800x400/1a1a2e/c4b5fd?text=Clusterização+K-Means",
-      "repoLink": "https://github.com/example/customer-segmentation"
-    }
-  },
-  {
-    "id": "test-chart",
-    "name": {
-      "pt-BR": "Gráfico Simples de Teste",
-      "en-US": "Simple Test Chart",
-      "es-ES": "Gráfico Simple de Prueba"
-    },
-    "description": {
-      "pt-BR": "Um projeto de visualização simples para testar a funcionalidade do novo modal de projeto.",
-      "en-US": "A simple visualization project to test the new project modal functionality.",
-      "es-ES": "Un proyecto simple de visualización para probar la funcionalidad del nuevo modal de proyecto."
-    },
-    "type": "Visualization",
-    "tags": ["JavaScript", "HTML", "Teste"],
-    "link": "https://github.com/example/test-chart",
-    "modalContent": {
-      "longDescription": {
-        "pt-BR": "Este é um projeto de teste para demonstrar como o conteúdo detalhado aparece no modal.\n\nAbaixo, você vê uma imagem estática de um gráfico de barras, que simula o resultado de uma análise de visualização de dados. O modal é capaz de exibir imagens, texto formatado e links.",
-        "en-US": "This is a test project to demonstrate how detailed content appears in the modal.\n\nBelow, you see a static bar chart image, simulating the result of a data visualization analysis. The modal can display images, formatted text, and links.",
-        "es-ES": "Este es un proyecto de prueba para demostrar cómo aparece el contenido detallado en el modal.\n\nA continuación, se ve una imagen estática de un gráfico de barras, que simula el resultado de un análisis de visualización de datos. El modal puede mostrar imágenes, texto formateado y enlaces."
-      },
-      "image": "https://placehold.co/800x400/2a2a3e/a855f7?text=Gráfico+de+Barras+(Exemplo)",
-      "repoLink": "https://github.com/example/test-chart",
-      "demoLink": "https://www.chartjs.org/docs/latest/"
+      "chartData": {
+        "labels": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+        "values": [12, 19, 7, 15, 22, 30]
+      }
     }
   }
 ]
