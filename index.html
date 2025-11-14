@@ -1,5 +1,3 @@
----
----
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,16 +6,15 @@
     <title data-i18n="title">Portfólio de Dados</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Definindo a fonte Inter, padrão em Tailwind */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d0d1a; /* Fundo roxo escuro */
-            color: #e5e7eb; /* Texto cinza claro */
+            background-color: #0d0d1a;
+            color: #e5e7eb;
             transition: background-color 0.5s;
         }
         .data-glow {
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); /* Sombra roxa sutil */
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
             transition: box-shadow 0.3s ease-in-out;
         }
         .data-glow:hover {
@@ -32,34 +29,45 @@
         .flag-button-icon {
             filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
         }
-        /* [REMOVIDO] A classe .editable não terá mais outline para evitar o quadrado */
-        /* .editable {
-            outline: 2px solid transparent;
-            transition: outline 0.2s;
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .editable:hover {
-            outline: 2px dashed rgba(168, 85, 247, 0.3);
-        } */
+        ::-webkit-scrollbar-track {
+            background: #0d0d1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4c1d95;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6d28d9;
+        }
+        /* Animações utilitárias */
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="min-h-screen">
 
-    <div id="lang-selector" class="fixed inset-0 bg-[#0d0d1a] z-50 flex flex-col items-center justify-center p-8 transition-opacity duration-500">
-        <h1 class="text-4xl md:text-6xl font-extrabold mb-12 text-purple-400 tracking-tight">
+    <div id="lang-selector" class="fixed inset-0 bg-[#0d0d1a] z-[100] flex flex-col items-center justify-center p-8 transition-opacity duration-500">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-12 text-purple-400 tracking-tight text-center">
             Selecione o Idioma
         </h1>
-        <div class="flex space-x-8 md:space-x-16">
-            
+        <div class="flex flex-wrap justify-center gap-8 md:gap-16">
             <button class="flag-button flex flex-col items-center group" onclick="selectLanguage('pt-BR')">
                 <span role="img" aria-label="Bandeira do Brasil" class="text-7xl flag-button-icon">🇧🇷</span>
                 <span class="mt-3 text-xl font-medium text-gray-300 group-hover:text-purple-300">Português BR</span>
             </button>
-
             <button class="flag-button flex flex-col items-center group" onclick="selectLanguage('en-US')">
                 <span role="img" aria-label="Bandeira dos EUA" class="text-7xl flag-button-icon">🇺🇸</span>
                 <span class="mt-3 text-xl font-medium text-gray-300 group-hover:text-purple-300">English US</span>
             </button>
-
             <button class="flag-button flex flex-col items-center group" onclick="selectLanguage('es-ES')">
                 <span role="img" aria-label="Bandeira da Espanha" class="text-7xl flag-button-icon">🇪🇸</span>
                 <span class="mt-3 text-xl font-medium text-gray-300 group-hover:text-purple-300">Español ES</span>
@@ -86,10 +94,10 @@
                 <p class="text-lg font-mono text-purple-400 mb-4 animate-pulse">
                     &gt; $ Bem-vindo.
                 </p>
-                <h2 class="text-6xl md:text-8xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 editable" data-i18n="hero_title">
+                <h2 class="text-6xl md:text-8xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500" data-i18n="hero_title">
                     Portfólio | Data & Risco
                 </h2>
-                <p class="text-2xl md:text-3xl text-gray-400 max-w-3xl mx-auto editable" data-i18n="hero_subtitle">
+                <p class="text-2xl md:text-3xl text-gray-400 max-w-3xl mx-auto" data-i18n="hero_subtitle">
                     Explore meus projetos de modelagem estatística e análise de dados.
                 </p>
                 <div class="mt-10 flex justify-center space-x-4">
@@ -105,7 +113,7 @@
             <section id="about" class="py-20 border-t border-purple-900/50">
                 <h3 class="text-4xl font-bold text-center mb-12 text-purple-300" data-i18n="nav_about">Sobre Mim</h3>
                 <div class="max-w-4xl mx-auto bg-[#1a1a2e] p-8 rounded-2xl data-glow">
-                    <p class="text-lg leading-relaxed text-gray-300 editable" data-i18n="about_content">
+                    <p class="text-lg leading-relaxed text-gray-300" data-i18n="about_content">
                         Sou um profissional focado em Análise de Dados e Risco, com uma forte base em Estatística e Ciências Atuariais. Minhas habilidades se concentram em modelagem, precificação e transformação de dados complexos em valor estratégico.
                     </p>
                     <div class="mt-8 text-center">
@@ -113,10 +121,9 @@
                             Atuarial | Pricing | GLMs | R | Python | SQL | Power BI
                         </span>
                     </div>
-
                     <div class="mt-10 pt-8 border-t border-gray-700 text-center">
                         <a href="curriculo.pdf" download target="_blank" class="inline-flex items-center px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl data-glow transition duration-300 hover:-translate-y-1">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                             </svg>
                             Baixar Currículo (PDF)
@@ -128,7 +135,7 @@
             <section id="projects" class="py-20 border-t border-purple-900/50">
                 <h3 class="text-4xl font-bold text-center mb-12 text-purple-300" data-i18n="projects_title">Meus Projetos</h3>
 
-                <div class="flex justify-center space-x-2 md:space-x-4 mb-12 flex-wrap">
+                <div class="flex justify-center space-x-2 md:space-x-4 mb-12 flex-wrap gap-y-2">
                     <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-purple-600 hover:bg-purple-700 text-white transition duration-300 active-filter" data-filter="All" data-i18n="filter_all">Todos</button>
                     <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-gray-700 hover:bg-purple-800/50 text-gray-300 transition duration-300" data-filter="ML" data-i18n="filter_ml">Machine Learning</button>
                     <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-gray-700 hover:bg-purple-800/50 text-gray-300 transition duration-300" data-filter="Visualization" data-i18n="filter_viz">Visualização</button>
@@ -160,6 +167,29 @@
 
     </div>
 
+    <div id="project-details-overlay" class="fixed inset-0 z-[9999] bg-[#0d0d1a] overflow-y-auto hidden transition-all duration-500 opacity-0">
+        
+        <div class="sticky top-0 z-50 bg-[#0d0d1a]/95 backdrop-blur-md border-b border-purple-900/30 shadow-2xl">
+            <div class="container mx-auto max-w-7xl px-4 py-4 flex justify-between items-center">
+                
+                <button onclick="closeProjectDetails()" class="group flex items-center text-gray-300 hover:text-white transition duration-200">
+                    <div class="p-2 bg-gray-800 rounded-full group-hover:bg-purple-600 transition mr-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                    </div>
+                    <span class="font-medium text-lg">Voltar</span>
+                </button>
+
+                <span class="text-purple-400 font-mono text-sm hidden md:block">&lt; Project_Viewer /&gt;</span>
+            </div>
+        </div>
+
+        <div id="project-details-content" class="container mx-auto max-w-6xl px-4 py-12 min-h-screen">
+            </div>
+
+    </div>
+
     <script>
         // --- 1. VARIÁVEIS GLOBAIS ---
         let projectsData = []; 
@@ -173,7 +203,7 @@
                 about_content: 'Sou um profissional focado em Análise de Dados e Risco, com uma forte base em Estatística e Ciências Atuariais. Minhas habilidades se concentram em modelagem, precificação e transformação de dados complexos em valor estratégico.',
                 projects_title: 'Meus Projetos', filter_all: 'Todos', filter_ml: 'Machine Learning',
                 filter_viz: 'Visualização', filter_risk: 'Pricing & Risco', no_projects: 'Nenhum projeto encontrado para este filtro.',
-                link_repo: 'Ver Repositório', link_demo: 'Ver Demo', btn_projects: 'Ver Projetos', btn_contact: 'Contato'
+                link_repo: 'Ver Repositório', btn_projects: 'Ver Projetos', btn_contact: 'Contato'
             },
             'en-US': {
                 title: 'Data Portfolio', nav_about: 'About Me', nav_projects: 'Projects',
@@ -181,7 +211,7 @@
                 about_content: 'I am a professional focused on Data and Risk Analysis, with a strong foundation in Statistics and Actuarial Science. My skills concentrate on modeling, pricing, and transforming complex data into strategic value.',
                 projects_title: 'My Projects', filter_all: 'All', filter_ml: 'Machine Learning',
                 filter_viz: 'Visualization', filter_risk: 'Pricing & Risk', no_projects: 'No projects found for this filter.',
-                link_repo: 'View Repository', link_demo: 'View Demo', btn_projects: 'View Projects', btn_contact: 'Contact'
+                link_repo: 'View Repository', btn_projects: 'View Projects', btn_contact: 'Contact'
             },
             'es-ES': {
                 title: 'Portafolio de Datos', nav_about: 'Sobre Mí', nav_projects: 'Proyectos',
@@ -189,11 +219,11 @@
                 about_content: 'Soy un profesional centrado en el Análisis de Datos y Riesgo, con una sólida base en Estadística y Ciencias Actuariales. Mis habilidades se concentran en el modelado, la fijación de precios y la transformación de datos complejos en valor estratégico.',
                 projects_title: 'Mis Proyectos', filter_all: 'Todos', filter_ml: 'Aprendizaje Automático',
                 filter_viz: 'Visualización', filter_risk: 'Precios y Riesgo', no_projects: 'No se encontraron proyectos para este filtro.',
-                link_repo: 'Ver Repositorio', link_demo: 'Ver Demo', btn_projects: 'Ver Proyectos', btn_contact: 'Contacto'
+                link_repo: 'Ver Repositorio', btn_projects: 'Ver Proyectos', btn_contact: 'Contacto'
             }
         };
 
-        // --- 3. LÓGICA DE CARREGAMENTO (FETCH JSON) ---
+        // --- 3. LÓGICA DE CARREGAMENTO DE PROJETOS ---
         async function loadProjects() {
             try {
                 const response = await fetch('projects.json');
@@ -207,14 +237,71 @@
                     container.innerHTML = `
                         <div class="col-span-3 text-center p-8 bg-red-900/20 rounded-xl border border-red-800">
                             <p class="text-red-400 font-bold">Erro ao carregar projetos</p>
-                            <p class="text-sm text-red-300 mt-2">Certifique-se de que o arquivo <code>projects.json</code> foi criado no GitHub.</p>
+                            <p class="text-sm text-red-300 mt-2">Verifique se está rodando via servidor local (Live Server).</p>
                         </div>
                     `;
                 }
             }
         }
 
-        // --- 4. FUNÇÕES DE RENDERIZAÇÃO ---
+        // --- 4. LÓGICA DO "NOVA PÁGINA" (MODAL SPA) ---
+        async function openProjectDetails(pageUrl) {
+            const overlay = document.getElementById('project-details-overlay');
+            const contentContainer = document.getElementById('project-details-content');
+
+            // Mostra carregando
+            contentContainer.innerHTML = `
+                <div class="flex flex-col items-center justify-center h-64 space-y-4">
+                    <div class="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+                    <p class="text-purple-300 animate-pulse">Carregando dados do projeto...</p>
+                </div>
+            `;
+            
+            // Exibe o overlay
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Trava o scroll do site principal
+
+            // Pequeno delay para ativar a transição CSS de opacidade
+            setTimeout(() => {
+                overlay.classList.remove('opacity-0');
+            }, 50);
+
+            if (pageUrl) {
+                try {
+                    const response = await fetch(pageUrl);
+                    if (!response.ok) throw new Error('Arquivo do projeto não encontrado');
+                    
+                    // Pega o HTML do arquivo e injeta na div
+                    const htmlContent = await response.text();
+                    contentContainer.innerHTML = htmlContent;
+                    overlay.scrollTop = 0;
+
+                } catch (error) {
+                    contentContainer.innerHTML = `
+                        <div class="text-center mt-20">
+                            <p class="text-red-400 text-xl font-bold">Erro ao carregar detalhes.</p>
+                            <p class="text-gray-400 mt-2">${error.message}</p>
+                        </div>
+                    `;
+                }
+            } else {
+                contentContainer.innerHTML = '<p class="text-center text-gray-500 mt-20">URL do projeto não definida.</p>';
+            }
+        }
+
+        function closeProjectDetails() {
+            const overlay = document.getElementById('project-details-overlay');
+            
+            overlay.classList.add('opacity-0');
+            document.body.style.overflow = 'auto'; // Libera o scroll
+
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+                document.getElementById('project-details-content').innerHTML = ''; 
+            }, 500);
+        }
+
+        // --- 5. RENDERIZAÇÃO E EVENTOS ---
         function translate(langCode) {
             currentLang = langCode;
             document.querySelectorAll('[data-i18n]').forEach(element => {
@@ -230,15 +317,15 @@
         function selectLanguage(langCode) {
             const langSelector = document.getElementById('lang-selector');
             const mainContent = document.getElementById('main-content');
-            const whatsappButton = document.getElementById('whatsapp-button'); // Pegar o botão do WhatsApp
+            const whatsappButton = document.getElementById('whatsapp-button');
 
             translate(langCode);
             langSelector.style.opacity = 0;
             setTimeout(() => {
                 langSelector.classList.add('hidden');
                 mainContent.classList.remove('hidden');
-                whatsappButton.classList.remove('opacity-0', 'pointer-events-none'); // Mostrar o botão do WhatsApp
-                whatsappButton.classList.add('opacity-100'); // Fazer ele aparecer
+                whatsappButton.classList.remove('opacity-0', 'pointer-events-none');
+                whatsappButton.classList.add('opacity-100');
 
                 setTimeout(() => {
                     mainContent.style.opacity = 1;
@@ -256,22 +343,41 @@
             else if (project.type === 'Visualization') icon = '📊';
             else if (project.type === 'Risk') icon = '🛡️';
 
-            return `
-                <div class="bg-[#1a1a2e] p-6 rounded-2xl data-glow hover:scale-[1.02] transform transition duration-300">
-                    <div class="flex items-center mb-4">
-                        <span class="text-3xl text-purple-400 mr-3">${icon}</span>
-                        <h4 class="text-xl font-bold text-white">${projectName}</h4>
-                    </div>
-                    <p class="text-gray-400 mb-4 text-sm line-clamp-4">${projectDescription}</p>
-                    
-                    <div class="mb-4 flex flex-wrap gap-2">
-                        ${project.tags.map(tag => `<span class="px-2 py-0.5 text-xs font-mono bg-purple-900/50 text-purple-300 rounded-full">${tag}</span>`).join('')}
-                    </div>
-
-                    <a href="${project.link}" target="_blank" class="inline-flex items-center text-sm font-medium text-purple-400 hover:text-purple-300 transition duration-200">
+            // LÓGICA DO BOTÃO: Se tem pageUrl, abre no site. Se não, abre link externo.
+            let actionButton = '';
+            if (project.pageUrl) {
+                actionButton = `
+                    <button onclick="openProjectDetails('${project.pageUrl}')" class="inline-flex items-center text-sm font-bold text-purple-400 hover:text-white bg-purple-900/30 hover:bg-purple-600 px-4 py-2 rounded-lg transition duration-300">
+                        Ver Detalhes
+                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                    </button>
+                `;
+            } else {
+                actionButton = `
+                    <a href="${project.link}" target="_blank" class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-purple-300 transition duration-200">
                         ${repoText}
                         <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                     </a>
+                `;
+            }
+
+            return `
+                <div class="bg-[#1a1a2e] p-6 rounded-2xl data-glow hover:scale-[1.02] transform transition duration-300 flex flex-col justify-between h-full border border-purple-900/20">
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <span class="text-3xl text-purple-400 mr-3 filter drop-shadow-lg">${icon}</span>
+                            <h4 class="text-xl font-bold text-white">${projectName}</h4>
+                        </div>
+                        <p class="text-gray-400 mb-6 text-sm line-clamp-3 leading-relaxed">${projectDescription}</p>
+                        
+                        <div class="mb-6 flex flex-wrap gap-2">
+                            ${project.tags.map(tag => `<span class="px-2 py-1 text-xs font-mono bg-[#0d0d1a] border border-purple-900/50 text-purple-300 rounded-md">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-purple-900/30 flex justify-between items-center">
+                        ${actionButton}
+                    </div>
                 </div>
             `;
         }
@@ -297,7 +403,7 @@
             }
         }
 
-        // --- 5. INICIALIZAÇÃO ---
+        // --- 6. INICIALIZAÇÃO ---
         document.addEventListener('DOMContentLoaded', () => {
             const filterButtons = document.querySelectorAll('.filter-btn');
             filterButtons.forEach(button => {
