@@ -2,28 +2,34 @@
   {
     "id": "internal-chart-test",
     "name": {
-      "pt-BR": "Visualização Interna (Chart.js)",
-      "en-US": "Internal Visualization (Chart.js)",
-      "es-ES": "Visualización Interna (Chart.js)"
+      "pt-BR": "Visualização Interna (SPA)",
+      "en-US": "Internal Visualization (SPA)",
+      "es-ES": "Visualización Interna (SPA)"
     },
     "description": {
-      "pt-BR": "Um teste interno que abre detalhes dentro do próprio site, contendo um gráfico simples.",
-      "en-US": "An internal test that opens details inside the site, containing a simple chart.",
-      "es-ES": "Una prueba interna que abre detalles dentro del sitio, con un gráfico simple."
+      "pt-BR": "Um teste interno que abre detalhes dentro do próprio site, carregando um arquivo HTML externo.",
+      "en-US": "An internal test that opens details inside the site, loading an external HTML file.",
+      "es-ES": "Una prueba interna que abre detalles dentro del sitio, cargando un archivo HTML externo."
     },
     "type": "Visualization",
-    "tags": ["Chart.js", "Demo Interna"],
-    "link": "#",
-    "modalContent": {
-      "longDescription": {
-        "pt-BR": "Projeto criado para testar exibição interna de detalhes no próprio site. Inclui um gráfico simples.",
-        "en-US": "Project created to test internal display inside the website. Includes a simple chart.",
-        "es-ES": "Proyecto creado para probar la visualización interna dentro del sitio. Incluye un gráfico simple."
-      },
-      "chartData": {
-        "labels": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
-        "values": [12, 19, 7, 15, 22, 30]
-      }
-    }
+    "tags": ["Chart.js", "HTML Injection"],
+    "link": "https://github.com/seu-usuario/repo",
+    "pageUrl": "projects/analise-risco.html"
+  },
+  {
+    "id": "exemplo-sem-detalhe",
+    "name": {
+      "pt-BR": "Modelo Preditivo GLM",
+      "en-US": "GLM Predictive Model",
+      "es-ES": "Modelo Predictivo GLM"
+    },
+    "description": {
+      "pt-BR": "Projeto simples que leva direto para o GitHub.",
+      "en-US": "Simple project linking directly to GitHub.",
+      "es-ES": "Proyecto simple que enlaza directamente a GitHub."
+    },
+    "type": "Risk",
+    "tags": ["R", "GLM", "Pricing"],
+    "link": "https://github.com/seu-usuario/repo2"
   }
 ]
