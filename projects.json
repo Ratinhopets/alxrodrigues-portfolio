@@ -12,13 +12,13 @@
       "es-ES": "Una prueba interna que abre detalles dentro del sitio, con un gráfico simple."
     },
     "type": "Visualization",
-    "tags": ["Chart.js", "JavaScript", "Demo Interna"],
-    "link": "#internal-project",
+    "tags": ["Chart.js", "Demo Interna"],
+    "link": "#",
     "modalContent": {
       "longDescription": {
-        "pt-BR": "Projeto criado para testar exibição interna de detalhes no próprio site. Inclui um gráfico simples para visualização.",
-        "en-US": "Project created to test internal display of details inside the website. Includes a simple chart.",
-        "es-ES": "Proyecto creado para probar la visualización interna dentro del sitio web. Incluye un gráfico simple."
+        "pt-BR": "Projeto criado para testar exibição interna de detalhes no próprio site. Inclui um gráfico simples.",
+        "en-US": "Project created to test internal display inside the website. Includes a simple chart.",
+        "es-ES": "Proyecto creado para probar la visualización interna dentro del sitio. Incluye un gráfico simple."
       },
       "chartData": {
         "labels": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
