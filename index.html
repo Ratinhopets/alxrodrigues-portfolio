@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="title">Portfólio de Dados</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
@@ -244,7 +248,7 @@
             }
         }
 
-        // --- 4. LÓGICA DO "NOVA PÁGINA" (MODAL SPA) ---
+        // --- 4. LÓGICA DO "NOVA PÁGINA" (SPA VIEW - COM EXECUÇÃO DE SCRIPT) ---
         async function openProjectDetails(pageUrl) {
             const overlay = document.getElementById('project-details-overlay');
             const contentContainer = document.getElementById('project-details-content');
@@ -275,6 +279,16 @@
                     const htmlContent = await response.text();
                     contentContainer.innerHTML = htmlContent;
                     overlay.scrollTop = 0;
+
+                    // --- TRUQUE MÁGICO: EXECUTAR SCRIPTS DO HTML CARREGADO ---
+                    // Necessário para rodar o Chart.js que vem no arquivo externo
+                    const scripts = contentContainer.querySelectorAll("script");
+                    scripts.forEach(oldScript => {
+                        const newScript = document.createElement("script");
+                        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                        newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                        oldScript.parentNode.replaceChild(newScript, oldScript);
+                    });
 
                 } catch (error) {
                     contentContainer.innerHTML = `
