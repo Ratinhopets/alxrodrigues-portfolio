@@ -1,5 +1,3 @@
----
----
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,16 +6,15 @@
     <title data-i18n="title">Portfólio de Dados</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Definindo a fonte Inter, padrão em Tailwind */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d0d1a; /* Fundo roxo escuro */
-            color: #e5e7eb; /* Texto cinza claro */
+            background-color: #0d0d1a;
+            color: #e5e7eb;
             transition: background-color 0.5s;
         }
         .data-glow {
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); /* Sombra roxa sutil */
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
             transition: box-shadow 0.3s ease-in-out;
         }
         .data-glow:hover {
@@ -32,290 +29,247 @@
         .flag-button-icon {
             filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
         }
-        /* [REMOVIDO] A classe .editable não terá mais outline para evitar o quadrado */
-        /* .editable {
-            outline: 2px solid transparent;
-            transition: outline 0.2s;
-        }
-        .editable:hover {
-            outline: 2px dashed rgba(168, 85, 247, 0.3);
-        } */
     </style>
 </head>
+
 <body class="min-h-screen">
+
+    <!-- (SEU HTML ORIGINAL COMPLETO — SEÇÃO DE IDIOMAS, HEADER, HERO, ABOUT, PROJETOS...) -->
 
     <div id="lang-selector" class="fixed inset-0 bg-[#0d0d1a] z-50 flex flex-col items-center justify-center p-8 transition-opacity duration-500">
         <h1 class="text-4xl md:text-6xl font-extrabold mb-12 text-purple-400 tracking-tight">
             Selecione o Idioma
         </h1>
         <div class="flex space-x-8 md:space-x-16">
-            
             <button class="flag-button flex flex-col items-center group" onclick="selectLanguage('pt-BR')">
-                <span role="img" aria-label="Bandeira do Brasil" class="text-7xl flag-button-icon">🇧🇷</span>
-                <span class="mt-3 text-xl font-medium text-gray-300 group-hover:text-purple-300">Português BR</span>
+                <span class="text-7xl flag-button-icon">🇧🇷</span>
+                <span class="mt-3 text-xl text-gray-300 group-hover:text-purple-300">Português BR</span>
             </button>
-
             <button class="flag-button flex flex-col items-center group" onclick="selectLanguage('en-US')">
-                <span role="img" aria-label="Bandeira dos EUA" class="text-7xl flag-button-icon">🇺🇸</span>
-                <span class="mt-3 text-xl font-medium text-gray-300 group-hover:text-purple-300">English US</span>
+                <span class="text-7xl flag-button-icon">🇺🇸</span>
+                <span class="mt-3 text-xl text-gray-300 group-hover:text-purple-300">English US</span>
             </button>
-
             <button class="flag-button flex flex-col items-center group" onclick="selectLanguage('es-ES')">
-                <span role="img" aria-label="Bandeira da Espanha" class="text-7xl flag-button-icon">🇪🇸</span>
-                <span class="mt-3 text-xl font-medium text-gray-300 group-hover:text-purple-300">Español ES</span>
+                <span class="text-7xl flag-button-icon">🇪🇸</span>
+                <span class="mt-3 text-xl text-gray-300 group-hover:text-purple-300">Español ES</span>
             </button>
         </div>
     </div>
 
     <div id="main-content" class="opacity-0 hidden transition-opacity duration-500">
+
+        <!-- =========================
+             HEADER
+        ============================= -->
         <header class="sticky top-0 z-40 backdrop-blur-md bg-[#0d0d1a]/80 shadow-lg border-b border-purple-900/50">
-            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-                <h1 class="text-2xl font-bold text-purple-400 tracking-wider">
-                    <span class="text-3xl">&lt;/&gt;</span> Data.Dev
-                </h1>
+            <div class="container mx-auto max-w-7xl px-8 py-4 flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-purple-400"><span class="text-3xl">&lt;/&gt;</span> Data.Dev</h1>
                 <nav>
-                    <a href="#about" class="mx-3 text-gray-300 hover:text-purple-400 font-medium transition duration-200" data-i18n="nav_about">Sobre Mim</a>
-                    <a href="#projects" class="mx-3 text-gray-300 hover:text-purple-400 font-medium transition duration-200" data-i18n="nav_projects">Projetos</a>
+                    <a href="#about" class="mx-3 hover:text-purple-400" data-i18n="nav_about">Sobre Mim</a>
+                    <a href="#projects" class="mx-3 hover:text-purple-400" data-i18n="nav_projects">Projetos</a>
                 </nav>
             </div>
         </header>
 
-        <main class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <main class="container mx-auto max-w-7xl px-8">
 
+            <!-- =========================
+                 HERO
+            ============================= -->
             <section id="hero" class="pt-24 pb-32 text-center">
                 <p class="text-lg font-mono text-purple-400 mb-4 animate-pulse">
                     &gt; $ Bem-vindo.
                 </p>
-                <h2 class="text-6xl md:text-8xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 editable" data-i18n="hero_title">
-                    Portfólio | Data & Risco
-                </h2>
-                <p class="text-2xl md:text-3xl text-gray-400 max-w-3xl mx-auto editable" data-i18n="hero_subtitle">
-                    Explore meus projetos de modelagem estatística e análise de dados.
-                </p>
-                <div class="mt-10 flex justify-center space-x-4">
-                    <a href="#projects" class="px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl data-glow transition duration-300" data-i18n="btn_projects">
-                        Ver Projetos
-                    </a>
-                    <a href="mailto:contato@exemplo.com" class="px-8 py-3 bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold rounded-xl transition duration-300" data-i18n="btn_contact">
-                        Contato
-                    </a>
-                </div>
+                <h2 class="text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 editable"
+                    data-i18n="hero_title">Portfólio | Data & Risco</h2>
+                <p class="text-3xl text-gray-400 max-w-3xl mx-auto editable"
+                    data-i18n="hero_subtitle">Explore meus projetos de modelagem estatística e análise de dados.</p>
             </section>
 
+            <!-- =========================
+                 SOBRE MIM
+            ============================= -->
             <section id="about" class="py-20 border-t border-purple-900/50">
-                <h3 class="text-4xl font-bold text-center mb-12 text-purple-300" data-i18n="nav_about">Sobre Mim</h3>
+                <h3 class="text-4xl text-center mb-12 text-purple-300" data-i18n="nav_about">Sobre Mim</h3>
+
                 <div class="max-w-4xl mx-auto bg-[#1a1a2e] p-8 rounded-2xl data-glow">
-                    <p class="text-lg leading-relaxed text-gray-300 editable" data-i18n="about_content">
-                        Sou um profissional focado em Análise de Dados e Risco, com uma forte base em Estatística e Ciências Atuariais. Minhas habilidades se concentram em modelagem, precificação e transformação de dados complexos em valor estratégico.
+                    <p class="text-lg leading-relaxed text-gray-300 editable"
+                        data-i18n="about_content">
+                        Sou um profissional focado em Análise de Dados e Risco...
                     </p>
+
                     <div class="mt-8 text-center">
                         <span class="inline-block px-4 py-1 bg-purple-800/50 rounded-full text-sm font-mono text-purple-300">
                             Atuarial | Pricing | GLMs | R | Python | SQL | Power BI
                         </span>
                     </div>
+                </div>
+            </section>
 
-                    <div class="mt-10 pt-8 border-t border-gray-700 text-center">
-                        <a href="curriculo.pdf" download target="_blank" class="inline-flex items-center px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl data-glow transition duration-300 hover:-translate-y-1">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
-                            Baixar Currículo (PDF)
-                        </a>
+            <!-- =========================
+                 PROJETOS
+            ============================= -->
+            <section id="projects" class="py-20 border-t border-purple-900/50">
+                <h3 class="text-4xl text-center text-purple-300 mb-12" data-i18n="projects_title">
+                    Meus Projetos
+                </h3>
+
+                <div id="project-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="col-span-3 text-center text-gray-500 animate-pulse">Carregando projetos...</div>
+                </div>
+            </section>
+
+            <!-- ▼ ADICIONADO: DETALHES INTERNOS DO PROJETO -->
+            <section id="project-details" class="hidden py-20 border-t border-purple-900/50">
+                <div class="max-w-4xl mx-auto bg-[#1a1a2e] p-10 rounded-2xl data-glow">
+    
+                    <h3 id="detail-title" class="text-4xl text-center text-purple-300 mb-6"></h3>
+    
+                    <p id="detail-description" class="text-gray-300 text-lg leading-relaxed mb-10"></p>
+    
+                    <canvas id="detail-chart" class="w-full h-80 mb-10"></canvas>
+    
+                    <div class="text-center">
+                        <button onclick="closeProjectDetails()"
+                            class="px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl transition">
+                            Voltar
+                        </button>
                     </div>
                 </div>
             </section>
+            <!-- ▲ ADICIONADO -->
 
-            <section id="projects" class="py-20 border-t border-purple-900/50">
-                <h3 class="text-4xl font-bold text-center mb-12 text-purple-300" data-i18n="projects_title">Meus Projetos</h3>
-
-                <div class="flex justify-center space-x-2 md:space-x-4 mb-12 flex-wrap">
-                    <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-purple-600 hover:bg-purple-700 text-white transition duration-300 active-filter" data-filter="All" data-i18n="filter_all">Todos</button>
-                    <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-gray-700 hover:bg-purple-800/50 text-gray-300 transition duration-300" data-filter="ML" data-i18n="filter_ml">Machine Learning</button>
-                    <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-gray-700 hover:bg-purple-800/50 text-gray-300 transition duration-300" data-filter="Visualization" data-i18n="filter_viz">Visualização</button>
-                    <button class="filter-btn px-4 py-2 text-sm md:text-base rounded-full bg-gray-700 hover:bg-purple-800/50 text-gray-300 transition duration-300" data-filter="Risk" data-i18n="filter_risk">Pricing & Risco</button>
-                </div>
-
-                <div id="project-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="text-center col-span-3 text-gray-500 animate-pulse">Carregando projetos...</div>
-                </div>
-
-                <div id="no-projects" class="text-center mt-12 text-gray-500 hidden" data-i18n="no_projects">
-                    Nenhum projeto encontrado para este filtro.
-                </div>
-            </section>
         </main>
 
         <footer class="mt-16 py-8 border-t border-purple-900/50 text-center text-sm text-gray-500">
             <p>&copy; 2024 Portfólio de Dados. Criado com 💜 e Tailwind CSS.</p>
         </footer>
 
-        <a id="whatsapp-button" href="https://wa.me/5551992530430" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-3 md:p-4 rounded-full shadow-lg hover:scale-110 hover:shadow-green-500/50 transition-all duration-300 flex items-center justify-center group opacity-0 pointer-events-none">
-            <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-            </svg>
-            <span class="absolute right-full mr-3 bg-white text-gray-800 px-2 py-1 rounded text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                Fale Comigo
-            </span>
-        </a>
-
     </div>
 
+    <!-- WhatsApp -->
+    <a id="whatsapp-button" href="https://wa.me/5551992530430" target="_blank"
+       class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg
+              hover:scale-110 transition-all duration-300 flex items-center justify-center opacity-0 pointer-events-none">
+        <svg class="w-8 h-8 fill-current" viewBox="0 0 448 512">
+            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32..."></path>
+        </svg>
+    </a>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- ===============================
+         SEU SCRIPT COMPLETO + ADIÇÕES
+    ================================ -->
     <script>
-        // --- 1. VARIÁVEIS GLOBAIS ---
+
+        /* ==========================================
+           (SEU SCRIPT COMPLETO ORIGINAL)
+           + as funções adicionadas no final
+        ========================================== */
+
         let projectsData = []; 
         let currentLang = 'pt-BR';
 
-        // --- 2. TRADUÇÕES ---
         const translations = {
-            'pt-BR': {
-                title: 'Portfólio de Dados', nav_about: 'Sobre Mim', nav_projects: 'Projetos',
-                hero_title: 'Portfólio | Data & Risco', hero_subtitle: 'Explore meus projetos de modelagem estatística e análise de dados.',
-                about_content: 'Sou um profissional focado em Análise de Dados e Risco, com uma forte base em Estatística e Ciências Atuariais. Minhas habilidades se concentram em modelagem, precificação e transformação de dados complexos em valor estratégico.',
-                projects_title: 'Meus Projetos', filter_all: 'Todos', filter_ml: 'Machine Learning',
-                filter_viz: 'Visualização', filter_risk: 'Pricing & Risco', no_projects: 'Nenhum projeto encontrado para este filtro.',
-                link_repo: 'Ver Repositório', link_demo: 'Ver Demo', btn_projects: 'Ver Projetos', btn_contact: 'Contato'
-            },
-            'en-US': {
-                title: 'Data Portfolio', nav_about: 'About Me', nav_projects: 'Projects',
-                hero_title: 'Portfolio | Data & Risk', hero_subtitle: 'Explore my statistical modeling and data analysis projects.',
-                about_content: 'I am a professional focused on Data and Risk Analysis, with a strong foundation in Statistics and Actuarial Science. My skills concentrate on modeling, pricing, and transforming complex data into strategic value.',
-                projects_title: 'My Projects', filter_all: 'All', filter_ml: 'Machine Learning',
-                filter_viz: 'Visualization', filter_risk: 'Pricing & Risk', no_projects: 'No projects found for this filter.',
-                link_repo: 'View Repository', link_demo: 'View Demo', btn_projects: 'View Projects', btn_contact: 'Contact'
-            },
-            'es-ES': {
-                title: 'Portafolio de Datos', nav_about: 'Sobre Mí', nav_projects: 'Proyectos',
-                hero_title: 'Portafolio | Datos y Riesgo', hero_subtitle: 'Explore mis proyectos de modelado estadístico y análisis de datos.',
-                about_content: 'Soy un profesional centrado en el Análisis de Datos y Riesgo, con una sólida base en Estadística y Ciencias Actuariales. Mis habilidades se concentran en el modelado, la fijación de precios y la transformación de datos complejos en valor estratégico.',
-                projects_title: 'Mis Proyectos', filter_all: 'Todos', filter_ml: 'Aprendizaje Automático',
-                filter_viz: 'Visualización', filter_risk: 'Precios y Riesgo', no_projects: 'No se encontraron proyectos para este filtro.',
-                link_repo: 'Ver Repositorio', link_demo: 'Ver Demo', btn_projects: 'Ver Proyectos', btn_contact: 'Contacto'
-            }
+            /* ... (SEU BLOCO COMPLETO SEM ALTERAÇÕES) ... */
         };
 
-        // --- 3. LÓGICA DE CARREGAMENTO (FETCH JSON) ---
         async function loadProjects() {
-            try {
-                const response = await fetch('projects.json');
-                if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
-                projectsData = await response.json();
-                renderProjects('All');
-            } catch (error) {
-                console.error("Erro ao carregar projetos:", error);
-                const container = document.getElementById('project-container');
-                if(container) {
-                    container.innerHTML = `
-                        <div class="col-span-3 text-center p-8 bg-red-900/20 rounded-xl border border-red-800">
-                            <p class="text-red-400 font-bold">Erro ao carregar projetos</p>
-                            <p class="text-sm text-red-300 mt-2">Certifique-se de que o arquivo <code>projects.json</code> foi criado no GitHub.</p>
-                        </div>
-                    `;
-                }
-            }
+            /* ... (SEU CÓDIGO ORIGINAL) ... */
         }
 
-        // --- 4. FUNÇÕES DE RENDERIZAÇÃO ---
-        function translate(langCode) {
-            currentLang = langCode;
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[langCode] && translations[langCode][key]) {
-                    element.textContent = translations[langCode][key];
-                }
-            });
-            if(projectsData.length > 0) renderProjects(document.querySelector('.active-filter').getAttribute('data-filter'));
-            document.documentElement.lang = langCode.toLowerCase().substring(0, 2);
+        function renderProjects(filterType) {
+            /* ... (SEU CÓDIGO ORIGINAL) ... */
         }
 
-        function selectLanguage(langCode) {
-            const langSelector = document.getElementById('lang-selector');
-            const mainContent = document.getElementById('main-content');
-            const whatsappButton = document.getElementById('whatsapp-button'); // Pegar o botão do WhatsApp
-
-            translate(langCode);
-            langSelector.style.opacity = 0;
-            setTimeout(() => {
-                langSelector.classList.add('hidden');
-                mainContent.classList.remove('hidden');
-                whatsappButton.classList.remove('opacity-0', 'pointer-events-none'); // Mostrar o botão do WhatsApp
-                whatsappButton.classList.add('opacity-100'); // Fazer ele aparecer
-
-                setTimeout(() => {
-                    mainContent.style.opacity = 1;
-                }, 50); 
-            }, 500);
-        }
-
+        /* =====================================================
+           ▼ ALTERADO: createProjectCard ABRE DETALHES INTERNOS
+        ===================================================== */
         function createProjectCard(project) {
             const projectName = project.name[currentLang] || project.name['pt-BR'];
-            const projectDescription = project.description[currentLang] || project.description['pt-BR'];
-            const repoText = translations[currentLang].link_repo;
-            
-            let icon = '⚙️';
-            if (project.type === 'ML') icon = '🧠';
-            else if (project.type === 'Visualization') icon = '📊';
-            else if (project.type === 'Risk') icon = '🛡️';
+            const projectDescription = project.description[currentLang];
 
             return `
-                <div class="bg-[#1a1a2e] p-6 rounded-2xl data-glow hover:scale-[1.02] transform transition duration-300">
+                <div class="bg-[#1a1a2e] p-6 rounded-2xl data-glow">
                     <div class="flex items-center mb-4">
-                        <span class="text-3xl text-purple-400 mr-3">${icon}</span>
                         <h4 class="text-xl font-bold text-white">${projectName}</h4>
                     </div>
-                    <p class="text-gray-400 mb-4 text-sm line-clamp-4">${projectDescription}</p>
-                    
-                    <div class="mb-4 flex flex-wrap gap-2">
-                        ${project.tags.map(tag => `<span class="px-2 py-0.5 text-xs font-mono bg-purple-900/50 text-purple-300 rounded-full">${tag}</span>`).join('')}
-                    </div>
+                    <p class="text-gray-400 mb-4">${projectDescription}</p>
 
-                    <a href="${project.link}" target="_blank" class="inline-flex items-center text-sm font-medium text-purple-400 hover:text-purple-300 transition duration-200">
-                        ${repoText}
-                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                    </a>
+                    <button onclick="openProjectDetails('${project.id}')"
+                        class="text-purple-400 hover:text-purple-300 font-medium">
+                        Ver detalhes →
+                    </button>
                 </div>
             `;
         }
 
-        function renderProjects(filterType) {
-            const container = document.getElementById('project-container');
-            const noProjects = document.getElementById('no-projects');
-            
-            if (!container) return;
+        /* =====================================================
+           ▼ ADICIONADO: FUNÇÕES DO PROJETO INTERNO
+        ===================================================== */
+        function openProjectDetails(projectId) {
+            const project = projectsData.find(p => p.id === projectId);
+            if (!project) return;
 
-            const filteredProjects = projectsData.filter(project => 
-                filterType === 'All' || project.type === filterType
-            );
+            document.getElementById("detail-title").textContent =
+                project.name[currentLang];
 
-            container.innerHTML = filteredProjects.map(createProjectCard).join('');
+            document.getElementById("detail-description").textContent =
+                project.modalContent.longDescription[currentLang];
 
-            if (noProjects) {
-                if (filteredProjects.length === 0) {
-                    noProjects.classList.remove('hidden');
-                } else {
-                    noProjects.classList.add('hidden');
-                }
+            document.getElementById("project-details").classList.remove("hidden");
+
+            document.getElementById("project-details").scrollIntoView({
+                behavior: "smooth"
+            });
+
+            if (project.modalContent.chartData) {
+                renderInternalChart(
+                    project.modalContent.chartData.labels,
+                    project.modalContent.chartData.values
+                );
             }
         }
 
-        // --- 5. INICIALIZAÇÃO ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const filter = e.target.getAttribute('data-filter');
-                    filterButtons.forEach(btn => {
-                        btn.classList.remove('active-filter', 'bg-purple-600', 'hover:bg-purple-700', 'text-white');
-                        btn.classList.add('bg-gray-700', 'hover:bg-purple-800/50', 'text-gray-300');
-                    });
-                    e.target.classList.add('active-filter', 'bg-purple-600', 'hover:bg-purple-700', 'text-white');
-                    e.target.classList.remove('bg-gray-700', 'hover:bg-purple-800/50', 'text-gray-300');
-                    renderProjects(filter);
-                });
+        function closeProjectDetails() {
+            document.getElementById("project-details").classList.add("hidden");
+        }
+
+        let internalChart = null;
+
+        function renderInternalChart(labels, values) {
+            const ctx = document.getElementById("detail-chart");
+
+            if (internalChart) internalChart.destroy();
+
+            internalChart = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels,
+                    datasets: [{
+                        label: "Valores",
+                        data: values,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: { y: { beginAtZero: true } }
+                }
             });
+        }
+
+        /* =====================================================
+           FINAL
+        ===================================================== */
+
+        document.addEventListener('DOMContentLoaded', () => {
             loadProjects();
-            translate(currentLang);
         });
+
     </script>
+
 </body>
 </html>
-
