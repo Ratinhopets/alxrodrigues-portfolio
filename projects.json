@@ -12,41 +12,7 @@
       "es-ES": "Análisis de Machine Learning identificando los 25 jugadores más similares a Alan Patrick en el Brasileirão 2025 usando clustering K-Means con 15 características estadísticas."
     },
     "type": "ML",
-    "tags": ["Python", "K-Means", "Scikit-learn", "Futebol", "Clustering"],
-    "link": "https://github.com/seu-usuario/clustering-alan-patrick",
+    "tags": ["Python", "K-Means", "Scikit-learn", "Sports Analytics"],
     "pageUrl": "projects/analise-alan-patrick.html"
-  },
-  {
-    "id": "internal-chart-test",
-    "name": {
-      "pt-BR": "Visualização Interna (SPA)",
-      "en-US": "Internal Visualization (SPA)",
-      "es-ES": "Visualización Interna (SPA)"
-    },
-    "description": {
-      "pt-BR": "Um teste interno que abre detalhes dentro do próprio site, carregando um arquivo HTML externo.",
-      "en-US": "An internal test that opens details inside the site, loading an external HTML file.",
-      "es-ES": "Una prueba interna que abre detalles dentro del sitio, cargando un archivo HTML externo."
-    },
-    "type": "Visualization",
-    "tags": ["Chart.js", "HTML Injection"],
-    "link": "https://github.com/seu-usuario/repo",
-    "pageUrl": "projects/analise-risco.html"
-  },
-  {
-    "id": "exemplo-sem-detalhe",
-    "name": {
-      "pt-BR": "Modelo Preditivo GLM",
-      "en-US": "GLM Predictive Model",
-      "es-ES": "Modelo Predictivo GLM"
-    },
-    "description": {
-      "pt-BR": "Projeto simples que leva direto para o GitHub.",
-      "en-US": "Simple project linking directly to GitHub.",
-      "es-ES": "Proyecto simple que enlaza directamente a GitHub."
-    },
-    "type": "Risk",
-    "tags": ["R", "GLM", "Pricing"],
-    "link": "https://github.com/seu-usuario/repo2"
   }
 ]
