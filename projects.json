@@ -1,5 +1,22 @@
 [
   {
+    "id": "analise-alan-patrick",
+    "name": {
+      "pt-BR": "Clusterização K-Means - Alan Patrick",
+      "en-US": "K-Means Clustering - Alan Patrick",
+      "es-ES": "Clusterización K-Means - Alan Patrick"
+    },
+    "description": {
+      "pt-BR": "Análise de Machine Learning identificando os 25 jogadores mais similares ao Alan Patrick no Brasileirão 2025 usando K-Means clustering com 15 features estatísticas.",
+      "en-US": "Machine Learning analysis identifying the 25 most similar players to Alan Patrick in Brasileirão 2025 using K-Means clustering with 15 statistical features.",
+      "es-ES": "Análisis de Machine Learning identificando los 25 jugadores más similares a Alan Patrick en el Brasileirão 2025 usando clustering K-Means con 15 características estadísticas."
+    },
+    "type": "ML",
+    "tags": ["Python", "K-Means", "Scikit-learn", "Futebol", "Clustering"],
+    "link": "https://github.com/seu-usuario/clustering-alan-patrick",
+    "pageUrl": "projects/analise-alan-patrick.html"
+  },
+  {
     "id": "internal-chart-test",
     "name": {
       "pt-BR": "Visualização Interna (SPA)",
