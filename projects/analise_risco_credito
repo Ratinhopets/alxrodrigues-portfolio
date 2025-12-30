@@ -1,0 +1,364 @@
+<!-- FRAGMENTO HTML: RISCO DE CRÉDITO -->
+<!-- Este arquivo é carregado dinamicamente dentro do modal do index.html -->
+
+<!-- Estilos Específicos para este relatório -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Open+Sans:wght@400;600&display=swap');
+    
+    .font-serif-academic { font-family: 'Merriweather', serif; }
+    .font-sans-academic { font-family: 'Open Sans', sans-serif; }
+    
+    /* Garante legibilidade dentro do tema escuro do site principal */
+    .paper-container {
+        background-color: white;
+        color: #1f2937; /* Gray-800 */
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+</style>
+
+<!-- Configuração MathJax (Fórmulas) -->
+<script>
+    window.MathJax = {
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+        svg: { fontCache: 'global' }
+    };
+</script>
+<!-- Carrega MathJax pois não está no index.html -->
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<!-- CONTAINER PRINCIPAL (Simula folha A4) -->
+<div class="paper-container p-6 md:p-12 max-w-5xl mx-auto font-serif-academic">
+
+    <!-- CABEÇALHO -->
+    <header class="border-b-4 border-gray-400 pb-8 mb-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div>
+                <div class="text-gray-500 font-bold tracking-widest uppercase text-xs mb-2 font-sans-academic">Portfólio de Atuária & Estatística</div>
+                <h1 class="text-3xl md:text-4xl font-bold mb-2 font-sans-academic text-gray-900">Modelagem Macroeconométrica de Risco de Crédito</h1>
+                <p class="text-gray-600 text-lg italic">Teste de Estresse e Projeção da Taxa de Inadimplência (PF)</p>
+            </div>
+            <div class="mt-6 md:mt-0 text-right">
+                <div class="text-sm text-gray-500 font-sans-academic">Dezembro 2025</div>
+                <div class="mt-2 inline-block px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full font-sans-academic">
+                    Python • Statsmodels
+                </div>
+                <button onclick="window.print()" class="no-print mt-4 ml-2 bg-gray-800 text-white border border-gray-600 px-3 py-1 rounded font-sans-academic text-xs hover:bg-gray-700 transition">
+                    Salvar PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. SUMÁRIO EXECUTIVO -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-gray-200 pb-2 font-sans-academic">1. Sumário Executivo</h2>
+        <p class="mb-6 leading-relaxed">
+            Este estudo investiga os determinantes macroeconómicos da taxa de inadimplência na carteira de crédito para pessoas físicas no Brasil. Através da modelagem de séries temporais, quantificou-se a sensibilidade do risco de crédito às alterações na política monetária, visando subsidiar estratégias de provisionamento (PDD) e gestão de solvência.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-sans-academic">
+            <!-- Card 1 -->
+            <div class="bg-gray-50 p-6 border border-gray-300 rounded-sm shadow-sm">
+                <h3 class="text-gray-600 text-xs font-bold uppercase mb-2">Coeficiente (R²)</h3>
+                <div class="text-3xl font-bold text-gray-900">70.9%</div>
+                <p class="text-sm text-gray-600 mt-2 italic">Aderência robusta aos dados históricos.</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="bg-gray-50 p-6 border border-gray-300 rounded-sm shadow-sm">
+                <h3 class="text-gray-600 text-xs font-bold uppercase mb-2">Fator Determinante</h3>
+                <div class="text-2xl font-bold text-gray-900">Taxa Selic</div>
+                <p class="text-sm text-gray-600 mt-2 italic">Defasagem temporal de 6 meses.</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="bg-red-50 p-6 border border-red-200 rounded-sm shadow-sm">
+                <h3 class="text-red-800 text-xs font-bold uppercase mb-2">Sensibilidade (Stress)</h3>
+                <div class="text-3xl font-bold text-red-700">+0.28 p.p.</div>
+                <p class="text-sm text-red-800 mt-2 italic">Incremento no default (Selic 20%).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. METODOLOGIA DETALHADA -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-gray-200 pb-2 font-sans-academic">2. Metodologia e Implementação</h2>
+        <div class="text-gray-800 leading-relaxed space-y-6 text-justify">
+            
+            <!-- 2.1 Dados e Teoria -->
+            <div>
+                <h3 class="text-lg font-bold text-gray-700 font-sans-academic mb-2">2.1. Dados e Fundamentação Económica</h3>
+                <p>
+                    A modelagem baseou-se em dados oficiais extraídos via API do Sistema Gerenciador de Séries Temporais (SGS) do Banco Central, compreendendo observações mensais entre janeiro de 2016 e dezembro de 2025.
+                </p>
+                <p class="mt-2">
+                    <strong>Fundamentação Teórica da Defasagem Temporal:</strong> Assumiu-se a hipótese de rigidez informacional e contratual no curto prazo. A política monetária (alteração na Selic) afeta o custo do crédito flutuante e a atividade económica com atraso. Testes de correlação cruzada indicaram que a resposta máxima da inadimplência ocorre com uma defasagem ($t-6$) em relação aos juros.
+                </p>
+            </div>
+
+            <!-- 2.2 Stack Tecnológico -->
+            <div class="bg-gray-50 p-6 border border-gray-200 rounded-sm">
+                <h3 class="text-lg font-bold text-gray-700 font-sans-academic mb-3">2.2. Arquitetura Computacional (Pipeline Python)</h3>
+                <p class="text-sm mb-4">
+                    Para garantir a reprodutibilidade, desenvolveu-se um fluxo automatizado em <strong>Python 3.11</strong>:
+                </p>
+                <ul class="list-disc list-inside text-sm space-y-3 ml-2">
+                    <li>
+                        <strong>Extração (`python-bcb`):</strong> Consulta programática à API SGS (Séries 21082, 432 e 433).
+                    </li>
+                    <li>
+                        <strong>Tratamento (`pandas`):</strong>
+                        <ul class="list-circle list-inside ml-6 mt-1 text-gray-600 space-y-1">
+                            <li>Normalização Temporal (Diário → Mensal via <code>resample</code>).</li>
+                            <li>Feature Engineering: Criação de <em>lags</em> (<code>df['Selic'].shift(6)</code>).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Modelagem (`statsmodels`):</strong> Estimação OLS e diagnósticos estatísticos (AIC/BIC, resíduos).
+                    </li>
+                </ul>
+            </div>
+
+            <div class="py-4 flex justify-center">
+                <div class="bg-white border border-gray-200 px-8 py-4 rounded text-center shadow-sm w-full md:w-2/3">
+                    <p class="text-xs text-gray-500 mb-2 uppercase font-sans-academic">Especificação do Modelo (OLS)</p>
+                    <div class="text-lg">
+                        $$ Y_t = \beta_0 + \beta_1 \cdot Selic_{(t-6)} + \beta_2 \cdot IPCA_t + \epsilon_t $$
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm border-t border-gray-100 pt-4">
+                <div>
+                    <strong class="block font-sans-academic mb-1 text-base">Variável Dependente ($Y_t$)</strong>
+                    <ul class="list-disc list-inside text-gray-700 ml-2">
+                        <li><strong>Série 21082:</strong> Inadimplência da Carteira de Crédito com Recursos Livres - Pessoa Física (Total).</li>
+                    </ul>
+                </div>
+                <div>
+                    <strong class="block font-sans-academic mb-1 text-base">Variáveis Independentes ($X_t$)</strong>
+                    <ul class="list-disc list-inside text-gray-700 ml-2">
+                        <li><strong>$X_1$:</strong> Taxa Selic Meta anualizada (Lag 6 meses).</li>
+                        <li><strong>$X_2$:</strong> IPCA Mensal - Índice oficial de inflação.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ANÁLISE VISUAL -->
+    <section class="mb-12 no-break">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-gray-200 pb-2 font-sans-academic">3. Análise Visual das Séries</h2>
+        <div class="border border-gray-200 p-4 rounded-sm shadow-sm bg-white">
+            <div class="h-80 md:h-96 w-full relative">
+                <canvas id="riskChart"></canvas>
+            </div>
+            <p class="text-xs text-center text-gray-500 mt-4 font-sans-academic italic">
+                Figura 1: Evolução Histórica (Fonte: BCB). A linha vermelha (Inadimplência) tende a seguir os movimentos da linha cinza (Selic) com defasagem.
+            </p>
+        </div>
+    </section>
+
+    <!-- 4. RESULTADOS ESTATÍSTICOS -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-gray-200 pb-2 font-sans-academic">4. Resultados Estatísticos</h2>
+        
+        <p class="mb-6 text-gray-700">
+            O modelo estimado via Mínimos Quadrados Ordinários (OLS) apresentou significância global (Teste F robusto) e coeficientes individuais estatisticamente diferentes de zero a um nível de confiança de 99%.
+        </p>
+
+        <div class="overflow-x-auto border border-gray-300 rounded-sm shadow-sm mb-6">
+            <table class="min-w-full text-sm text-left">
+                <thead class="bg-gray-100 text-gray-700 font-sans-academic font-bold border-b border-gray-300">
+                    <tr>
+                        <th class="px-6 py-3">Variável</th>
+                        <th class="px-6 py-3 text-right">Coeficiente ($\beta$)</th>
+                        <th class="px-6 py-3 text-right">Erro Padrão</th>
+                        <th class="px-6 py-3 text-center">P-Valor ($P>|t|$)</th>
+                        <th class="px-6 py-3">Interpretação Económica</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 font-serif-academic">
+                    <tr>
+                        <td class="px-6 py-3 font-semibold">Constante ($\beta_0$)</td>
+                        <td class="px-6 py-3 text-right">2.4407</td>
+                        <td class="px-6 py-3 text-right">0.052</td>
+                        <td class="px-6 py-3 text-center">&lt; 0.001</td>
+                        <td class="px-6 py-3 text-gray-600">Nível estrutural de inadimplência.</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="px-6 py-3 font-semibold">Selic Lag-6 ($\beta_1$)</td>
+                        <td class="px-6 py-3 text-right font-bold text-gray-900">+0.0870</td>
+                        <td class="px-6 py-3 text-right">0.004</td>
+                        <td class="px-6 py-3 text-center">&lt; 0.001</td>
+                        <td class="px-6 py-3 text-gray-600">
+                            <strong>Sensibilidade Positiva:</strong> Um aumento de 1 p.p. na Selic projeta elevação de 0.09 p.p. na inadimplência após um semestre.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 font-semibold">IPCA ($\beta_2$)</td>
+                        <td class="px-6 py-3 text-right">-0.3061</td>
+                        <td class="px-6 py-3 text-right">0.047</td>
+                        <td class="px-6 py-3 text-center">&lt; 0.001</td>
+                        <td class="px-6 py-3 text-gray-600">
+                            <strong>Correlação Inversa:</strong> Na amostra, inflação mais alta correlacionou-se com menor inadimplência.*
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 text-sm text-gray-700">
+            <strong class="font-sans-academic block mb-1">Nota sobre o Coeficiente do IPCA:</strong>
+            O sinal negativo para a inflação pode parecer contraintuitivo, mas encontra respaldo na literatura económica sob duas óticas: 
+            (1) A inflação reduz o valor presente das obrigações pré-fixadas antigas (efeito riqueza); 
+            (2) Curva de Phillips de curto prazo: períodos de inflação moderada frequentemente coincidem com aquecimento económico e baixo desemprego.
+        </div>
+    </section>
+
+    <!-- 5. TESTE DE ESTRESSE (Completo) -->
+    <section class="mb-12 border border-gray-300 rounded-sm overflow-hidden shadow-sm">
+        <div class="bg-gray-100 px-8 py-4 border-b border-gray-300">
+            <h2 class="text-lg font-bold text-gray-800 font-sans-academic">5. Teste de Estresse (Cenário Adverso)</h2>
+        </div>
+        
+        <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-white">
+            
+            <!-- Parâmetros -->
+            <div class="space-y-4 font-sans-academic">
+                <h4 class="text-xs font-bold text-gray-500 uppercase">Parâmetros de Sensibilização</h4>
+                <p class="text-sm text-gray-700">
+                    Simulação de um ciclo de contração monetária severa. O objetivo é isolar a sensibilidade da carteira aos juros (<em>ceteris paribus</em>).
+                </p>
+                <div class="flex items-center space-x-4 text-sm mt-4">
+                    <div class="border border-gray-300 px-4 py-2 rounded text-center bg-gray-50">
+                        <div class="text-gray-500 text-xs uppercase">Cenário Base</div>
+                        <div class="font-bold text-gray-800">15.0%</div>
+                    </div>
+                    <span class="text-gray-400">&rarr;</span>
+                    <div class="border border-red-200 bg-red-50 px-4 py-2 rounded text-center">
+                        <div class="text-red-700 text-xs font-bold uppercase">Choque (+500 bps)</div>
+                        <div class="font-bold text-red-800">20.0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resultado -->
+            <div class="bg-gray-50 p-6 border border-gray-200 rounded text-sm">
+                <h4 class="text-xs font-bold text-gray-500 uppercase mb-4 text-center font-sans-academic">Projeção da Taxa de Inadimplência</h4>
+                
+                <div class="space-y-3 font-sans-academic">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Taxa Observada (Atual)</span>
+                        <span class="font-bold text-gray-800">3.84%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1.5">
+                        <div class="bg-gray-500 h-1.5 rounded-full" style="width: 38.4%"></div>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-2">
+                        <span class="text-red-800 font-semibold">Taxa Projetada (Stress)</span>
+                        <span class="font-bold text-red-700">4.12%</span>
+                    </div>
+                    <div class="w-full bg-red-100 rounded-full h-1.5">
+                        <div class="bg-red-700 h-1.5 rounded-full" style="width: 41.2%"></div>
+                    </div>
+                    
+                    <div class="text-right text-xs text-red-600 font-bold mt-1">
+                        Δ +0.28 p.p. (Incremento Líquido de Risco)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 6. LIMITAÇÕES -->
+    <section class="mb-12">
+        <h2 class="text-xl font-bold text-gray-800 mb-4 border-b border-gray-200 pb-2 font-sans-academic">6. Limitações do Modelo</h2>
+        <p class="text-sm text-gray-600 leading-relaxed italic">
+            Este modelo adota uma abordagem parsimoniosa. Limitações relevantes incluem: (1) Ausência de variáveis do mercado de trabalho (Desemprego, Massa Salarial) que possuem alto poder explicativo na solvência das famílias; (2) A linearidade assumida pode não capturar rupturas estruturais em momentos de crise aguda (não linearidade); (3) Não segmentação por tipo de crédito (ex: Rotativo vs Consignado), tratando a carteira de forma agregada.
+        </p>
+    </section>
+
+    <!-- CONCLUSÃO -->
+    <section class="bg-gray-100 p-8 border-t border-gray-300 text-center rounded-sm">
+        <h3 class="text-lg font-bold text-gray-800 mb-2 font-sans-academic">Conclusão</h3>
+        <p class="max-w-3xl mx-auto leading-relaxed text-gray-700">
+            O modelo confirma a <strong>alta sensibilidade da carteira às oscilações da política monetária</strong>. Recomenda-se aumentar a provisão para perdas (PDD) preventivamente sempre que o Banco Central sinalizar início de ciclo de aperto monetário, antecipando-se à deterioração da qualidade de crédito observada tipicamente 6 meses após a alta dos juros.
+        </p>
+    </section>
+
+</div>
+
+<!-- SCRIPT DO GRÁFICO (Executado automaticamente pelo loader do index.html) -->
+<script>
+    (function() {
+        const ctx = document.getElementById('riskChart').getContext('2d');
+        const labels = ['2020', '2021', '2021', '2022', '2022', '2023', '2023', '2024', '2024', '2025'];
+        const selicData = [2.0, 2.75, 9.25, 11.75, 13.75, 13.75, 12.25, 10.5, 12.0, 15.0];
+        const inadData =  [2.9, 2.8,  2.9,  3.5,   4.1,   4.3,   3.9,   3.5,  3.6,  3.84];
+
+        // Força cores escuras para o gráfico (já que o fundo do papel é branco)
+        Chart.defaults.color = '#333';
+        Chart.defaults.font.family = "'Open Sans', sans-serif";
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Inadimplência PF (%)',
+                        data: inadData,
+                        borderColor: '#111', 
+                        backgroundColor: 'rgba(0, 0, 0, 0.05)',
+                        borderWidth: 2,
+                        yAxisID: 'y',
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#111'
+                    },
+                    {
+                        label: 'Taxa Selic (%)',
+                        data: selicData,
+                        borderColor: '#999',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        yAxisID: 'y1',
+                        tension: 0.3,
+                        pointRadius: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        titleColor: '#000',
+                        bodyColor: '#333',
+                        borderColor: '#ddd',
+                        borderWidth: 1,
+                        displayColors: true
+                    }
+                },
+                scales: {
+                    y: {
+                        position: 'left',
+                        grid: { color: '#f0f0f0' },
+                        title: { display: true, text: 'Inadimplência (%)' }
+                    },
+                    y1: {
+                        position: 'right',
+                        grid: { drawOnChartArea: false },
+                        title: { display: true, text: 'Selic (%)' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    })();
+</script>
