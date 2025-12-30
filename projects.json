@@ -14,5 +14,21 @@
     "type": "ML",
     "tags": ["Python", "K-Means", "Scikit-learn", "Sports Analytics"],
     "pageUrl": "projects/analise-alan-patrick.html"
+  },
+  {
+    "id": "macro-credit-risk",
+    "name": {
+      "pt-BR": "Modelagem Macroeconométrica de Risco de Crédito",
+      "en-US": "Macroeconometric Credit Risk Modeling",
+      "es-ES": "Modelado Macroeconómico de Riesgo de Crédito"
+    },
+    "description": {
+      "pt-BR": "Modelo de Stress Testing para projeção da taxa de inadimplência PF usando dados do Banco Central (SGS) e regressão linear múltipla com defasagem temporal de 6 meses.",
+      "en-US": "Stress Testing model for projecting default rates using Central Bank data and multiple linear regression with a 6-month time lag.",
+      "es-ES": "Modelo de Stress Testing para la proyección de incumplimientos utilizando datos del Banco Central y regresión lineal con rezago temporal."
+    },
+    "type": "Risk",
+    "tags": ["Python", "Statsmodels", "Econometria", "Time Series"],
+    "pageUrl": "projects/relatorio_risco.html"
   }
 ]
